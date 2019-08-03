@@ -29,15 +29,22 @@
 
 <style>
 
-    .well { background:none; }
+    .well { 
+        background:none; 
+    }
+
+    section#catalog-section {
+        overflow:auto;
+        background-color:#000;
+    }
 
 </style>
 
-<section class="mbr-section middle" id="body-section">
+<section class="mbr-section" id="catalog-section">
 
-<div id="product-catalog-panel" class="tab-content" style="width:100%;heigth:100%;">
+<div id="product-catalog-panel" class="tab-content" style="width:100%;">
 
-    <div id="catalog-items-panel" class="well" style="width:100%;heigth:100%;">
+    <div id="catalog-items-panel" class="well" style="width:100%;margin:0;">
 
         <h4>Products:
             <div id="counter" class="pull-right small" style="margin-top:4px;color:#ddd;">
@@ -61,7 +68,7 @@
                 <li class="btn btn-primary get-next-btn pull-right">&#9658;</li>
             </div>
 
-            <div id="products-display" class="well" style="min-width:320px;min-height:450px;"></div>
+            <div id="products-display" class="well" style="min-width:320px;min-height:450px;max-height:705px;height:700px;"></div>
 
             <div style="margin:10px 0px 10px;height:35px;">
                 <li class="btn btn-primary btn-white-outline first-page-btn pull-left" style="margin-right:5px;">First</li>
