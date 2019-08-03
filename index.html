@@ -37,10 +37,9 @@
         background:none; 
     }
 
-    .product-card { 
+    .well.product-card { 
         height:48%;
         width:22.8rem;
-        margin-bottom:12px;
         display:inline-block; 
     }
 
@@ -68,9 +67,9 @@
 
         <h4 style="color:#fff;">My products:
             <div id="counter" class="pull-right small" style="margin-top:4px;color:#ddd;">
-                <span id="from">zero</span>
-                to <span id="upto">zero</span>
-                of <span id="count">none</span>
+                <span class="from">zero</span>
+                to <span class="upto">zero</span>
+                of <span class="count">none</span>
             </div>
         </h4>
 
@@ -102,6 +101,9 @@
             <div style="margin:10px auto 10px auto;height:35px;max-width:350px;">
                 <li class="btn btn-primary btn-white-outline first-page-btn pull-left" style="margin-right:5px;">First</li>
                 <li class="btn btn-primary btn-white-outline get-prev-group-btn pull-left">&#9668;&#9668;</li>
+                <div id="counter" class="small" style="width:fit-content;display:inline;height:35px;margin-top:4px;color:#ddd;">
+                    <span class="from">zero</span> to <span class="upto">zero</span> of <span class="count">none</span>
+                </div>
                 <li class="btn btn-primary btn-white-outline last-page-btn pull-right" style="margin-left:5px;">Last</li>
                 <li class="btn btn-primary btn-white-outline get-next-group-btn pull-right">&#9658;&#9658;</li>
             </div>
