@@ -44,6 +44,25 @@
         min-height:250px;;
     }
 
+    #product-preview-pane {
+        width:49%;
+        height:600px;
+        min-width:49%;
+        max-width:100%;
+        display:inline-block;
+        border:thin solid #ccc;
+    }
+
+    #product-info-pane {
+        width:49%;
+        height:600px;
+        float:right;
+        min-width:49%;
+        max-width:100%;
+        display:inline-block;
+        border:thin solid #ccc;
+    }
+
     @media all and ( max-width: 640px ) {
 
         #product-preview-pane {
@@ -54,8 +73,25 @@
         #product-info-pane {
             width:100%;
             height:400px;
+            float:unset;
         }
 
+    }
+
+    #product-preview {
+        width:auto;
+        margin:auto;
+        height:600px;
+        min-height:400px;
+        max-height:600px;
+    }
+
+    #product-info {
+        width:100%;
+        margin:auto;
+        height:600px;
+        min-height:400px;
+        max-height:600px;
     }
 
 </style>
@@ -70,8 +106,8 @@
         <input type="text" id="product-title" class="form-control text-center x-large product-title-field" placeholder="untitled product" readOnly>
     </div>
 
-    <div id="product-preview-pane" style="max-width:100%;min-width:49%;display:inline-block;border:thin solid #ccc;">
-        <img id="product-preview" style="width:auto;min-height:400px;max-height:600px;margin:auto;">
+    <div id="product-preview-pane">
+        <img id="product-preview" style="">
         <script>
             (function(){
                 const productPreview = $("img#product-preview").get(0);
@@ -85,12 +121,12 @@
         </script>
     </div>
 
-    <div id="product-info-pane" style="max-width:100%;min-width:49%;display:inline-block;float:right;border:thin solid #ccc;">
-        <div id="product-info" style="width:100%;min-height:400px;max-height:600px;margin:auto;"></div>
+    <div id="product-info-pane">
+        <div id="product-info"></div>
     </div>
 
     <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
-        <div class="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
+        <div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
             <div id="product-snapshots" class="product-snapshots" style="display:inline-block;width:max-content;text-align:center;">
                 <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
                 <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
@@ -120,7 +156,7 @@
                 <li class role="presentation"><a href="#outfits-tab" data-toggle="pill" class="pills right-pill right-pill-outfits">Outfit</a></li>
                 <li class role="presentation"><a href="#texture-tab" data-toggle="pill" class="pills right-pill right-pill-outfits">Texture</a></li>
                 <li class role="presentation"><a href="#product-tab" data-toggle="pill" class="pills right-pill right-pill-product">Product</a></li>
-                <li class role="presentation"><a href="#edit-tab" data-toggle="pill" class="pills right-pill right-pill-edit">Edit</a></li>
+                <!-- li class role="presentation"><a href="#edit-tab" data-toggle="pill" class="pills right-pill right-pill-edit">Edit</a></li -->
 
             </ul>
         </div>
@@ -131,7 +167,7 @@
             <div id="outfits-tab" class="component-pane tab-pane fade"></div>
             <div id="texture-tab" class="component-pane tab-pane fade"></div>
             <div id="product-tab" class="component-pane tab-pane fade"></div>
-            <div id="edit-tab" class="component-pane tab-pane fade"></div>
+            <!--div id="edit-tab" class="component-pane tab-pane fade"></div -->
 
         </div>
 
