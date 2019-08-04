@@ -29,41 +29,50 @@
 
 <section class="mbr-section" id="details-section">
 
-    <div class="container well">
+<div class="container well">
 
-        <div class="helpers-header newitem-header" style="margin-bottom:20px;">
-            <input type="text" id="product-title" class="form-control text-center x-large product-title-field" placeholder="untitled product" readOnly>
+    <div class="helpers-header newitem-header" style="margin-bottom:20px;">
+        <input type="text" id="product-title" class="form-control text-center x-large product-title-field" placeholder="untitled product" readOnly>
+    </div>
+
+    <div id="product-preview-pane">
+        <div style="width:49%;display:inline-block;">
+            <img id="product-preview" style="width:100%;height:600px;margin:auto;">
+            <script>
+                (function(){
+                    const productPreview = $("img#product-preview").get(0);
+                    $(productPreview).on("load", function(){
+                        if ( this.src.startsWith("blob:") ) {
+                            window.URL.revokeObjectURL(this.src); // important!
+                            debugMode && console.log("revoked", this.src);
+                        }
+                    });
+                })();
+            </script>
         </div>
 
-        <div id="product-preview-pane">
-            <div style="width:49%;display:inline-block;">
-                <img id="product-preview" style="width:100%;height:600px;margin:auto;">
-                <script>
-                    (function(){
-                        const productPreview = $("img#product-preview").get(0);
-                        $(productPreview).on("load", function(){
-                            if ( this.src.startsWith("blob:") ) {
-                                window.URL.revokeObjectURL(this.src); // important!
-                                debugMode && console.log("revoked", this.src);
-                            }
-                        });
-                    })();
-                </script>
-            </div>
-
-            <div style="width:49%;display:inline-block;float:right;">
-                <div id="product-info" style="width:100%;height:600px;margin:auto;border:thin solid #ccc;">
-                </div>
-            </div>
-
+        <div style="width:49%;display:inline-block;float:right;">
+            <div id="product-info" style="width:100%;height:600px;margin:auto;border:thin solid #ccc;"></div>
         </div>
 
+    </div>
+
+    <div id="product-snapshots-pane">
+        <div class="product-snapshots-container" style="margin-bottom:0px;overflow-y:hidden;max-width:100%;text-align:center;">
+            <div id="product-snapshots" class="product-snapshots" style="display:inline-block;width:max-content;text-align:center;">
+                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--
         <div id="product-description-pane" class="well" style="height:250px;margin-bottom:20px;background:none;">
             <h4 style="margin-top:0px;">Description:</h4>
             <div id="product-description" style="width:100%;height:100%;overflow:auto;border:none;background:none;"></div>
         </div>
-
-</div>
+-->
 
 </section>
 
