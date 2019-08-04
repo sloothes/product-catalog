@@ -341,6 +341,10 @@
             $(displayObjects).children().remove();
             debugMode && console.log({"docs":docs});
 
+            $(catalogItemsPanel).find(".from").text(skip + 1); 
+            $(catalogItemsPanel).find(".upto").text(skip + docs.length);
+            $(catalogItemsPanel).find(".count").text(skip + docs.length);
+
             caches.open("thumbnails").then(function(cache){
 
                 docs.forEach(function(doc){
