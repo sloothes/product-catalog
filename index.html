@@ -51,6 +51,7 @@
     }
 
     .card-field-title {
+        max-width:100%;
         font-size:2rem;
         font-weight:normal;
         font-family:sans-serif;
@@ -386,7 +387,7 @@
                     var title = document.createElement("input");
                     title.classList.add("form-control card-field-title");
                     title.type = "text"; title.readonly = true; title.value = title.title = doc.name;
-                    title.style.cssText = "background:none;border:none;background:none;box-shadow:none;max-width:100%;";
+                    title.style.cssText = "background:none;border:none;background:none;box-shadow:none;";
 
                     var details = document.createElement("span");
                     details.innerText = "Details";
