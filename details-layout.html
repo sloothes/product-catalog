@@ -56,8 +56,8 @@
     </div>
 
     <div id="product-preview-pane">
-        <div style="width:49%;display:inline-block;">
-            <img id="product-preview" style="width:100%;height:600px;margin:auto;">
+        <div style="max-width:100%;width:49%;display:inline-block;">
+            <img id="product-preview" style="width:auto;max-height:600px;height:400px;margin:auto;">
             <script>
                 (function(){
                     const productPreview = $("img#product-preview").get(0);
@@ -71,7 +71,7 @@
             </script>
         </div>
 
-        <div style="width:49%;display:inline-block;float:right;">
+        <div style="max-width:100%;width:49%;display:inline-block;float:right;">
             <div id="product-info" style="width:100%;height:600px;margin:auto;border:thin solid #ccc;"></div>
         </div>
 
@@ -129,7 +129,7 @@
 
         <div style="width:100%;margin-bottom:20px;">
             <ul class="nav nav-tabs nav-pills" style="width:100%;overflow:hidden;">
-                <li class role="presentation" style="width:100%"><a href="#additional-options-tab" data-toggle="pill" class="pills right-pill right-pill-description">Additional options</a></li>
+                <li class="active" role="presentation" style="width:100%"><a href="#additional-options-tab" data-toggle="pill" class="pills right-pill right-pill-options">Additional options</a></li>
             </ul>
         </div>
 
@@ -139,19 +139,7 @@
 
     </div>
 
-
-
-
-
-
 </div>
-
-<!--
-        <div id="product-description-pane" class="well" style="height:250px;margin-bottom:20px;background:none;">
-            <h4 style="margin-top:0px;">Description:</h4>
-            <div id="product-description" style="width:100%;height:100%;overflow:auto;border:none;background:none;"></div>
-        </div>
--->
 
 </section>
 
