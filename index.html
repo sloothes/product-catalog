@@ -283,7 +283,13 @@
     var currentpage = 0;
     var currentindex = 0;
 
+//  Signals.
+    var Signal = signals.Signal;
+
 //  too slow!
+//  For performance we count items only when we ask last page 
+//  or we change droplist selectors. Not need to count on backward.
+
     function count(){
         var k = skip;
         return collection.find(selectors)
@@ -340,7 +346,8 @@
                 docs.forEach(function(doc){
 
                     var card = document.createElement("li");
-                    card.data = doc; // optional!
+                    card.id = doc._id; // optional!
+                    card.data = doc;   // optional!
                     card.classList.add("well", "product-card");
 
                     var img = new Image();
@@ -382,8 +389,18 @@
                     details.style.cssText = "width:50%;background-color:#42bcf9;";
 
                     $(details).on("click", function(){
+
                     //  TODO: Open a sale page with details of the product. 
                         console.log({"product_UUID":details.product_UUID});
+
+
+
+
+
+
+
+
+
                     });
 
                     $(card).append(img, price, title, details);
@@ -459,13 +476,8 @@
 
 
 
-//  Signals.
-
-    var Signal = signals.Signal;
 
 
-//  For performance we count items only when we ask last page 
-//  or we change droplist selectors. Not need to count on backward.
 
 
 
