@@ -53,6 +53,13 @@
         border:thin solid #ccc;
     }
 
+    img#product-preview {
+        width:auto;
+        margin:auto;
+        min-height:460px;
+        max-height:460px;
+    }
+
     #product-info-pane {
         width:49%;
         height:600px;
@@ -61,14 +68,6 @@
         max-width:100%;
         display:inline-block;
         border:thin solid #ccc;
-    }
-
-    #product-preview {
-        width:auto;
-        margin:auto;
-        height:600px;
-        min-height:400px;
-        max-height:600px;
     }
 
     #product-info {
@@ -83,7 +82,6 @@
 
         #product-preview-pane {
             width:100%;
-            height:400px;
         }
 
         #product-info-pane {
@@ -93,10 +91,6 @@
         }
 
         #product-info {
-            height:100%;
-        }
-
-        #product-preview {
             height:100%;
         }
 
@@ -127,32 +121,33 @@
                 });
             })();
         </script>
+
+        <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
+            <div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
+                <div id="product-snapshots" class="product-snapshots" style="display:inline-block;width:max-content;text-align:center;">
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div id="product-info-pane">
         <div id="product-info"></div>
-    </div>
-
-    <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
-        <div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
-            <div id="product-snapshots" class="product-snapshots" style="display:inline-block;width:max-content;text-align:center;">
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-            </div>
-        </div>
     </div>
 
     <div id="product-tabs-pane">
