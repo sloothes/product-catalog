@@ -35,14 +35,30 @@
             <input type="text" id="product-title" class="form-control text-center x-large product-title-field" placeholder="untitled product" readOnly>
         </div>
 
+        <div id="preview-info">
+            <div>
+                <img id="product-preview" style="max-width:100%;max-height:300px;margin:auto;">
+                <script>
+                    (function(){
+                        const productPreview = $("img#product-preview").get(0);
+                        $(productPreview).on("load", function(){
+                            if ( this.src.startsWith("blob:") ) {
+                                window.URL.revokeObjectURL(this.src); // important!
+                                debugMode && console.log("revoked", this.src);
+                            }
+                        });
+                    })();
+                </script>
+            </div>
 
+            <div>
+                <div id="product-description-panel" class="well" style="height:250px;margin-bottom:20px;background:none;">
+                    <h4 style="margin-top:0px;">Description:</h4>
+                    <textarea id="product-description" style="width:100%;height:180px;overflow:auto;border:none;background:none;"></textarea>
+                </div>
+            </div>
 
-
-
-
-
-
-
+        </div>
 
 
 </div>
