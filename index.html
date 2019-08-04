@@ -109,28 +109,28 @@
                 <li class="well product-card demo-card">
                     <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
                     <div class="card-field-price">22.99&nbsp;&thorn;</div>
-                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales">
+                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly>
                     <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
                 </li>
 
                 <li class="well product-card demo-card">
                     <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
                     <div class="card-field-price">354.00&nbsp;&thorn;</div>
-                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales">
+                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly>
                     <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
                 </li>
 
                 <li class="well product-card demo-card">
                     <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
                     <div class="card-field-price">452.00&nbsp;&thorn;</div>
-                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales">
+                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly>
                     <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
                 </li>
 
                 <li class="well product-card demo-card">
                     <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
                     <div class="card-field-price">12.99&nbsp;&thorn;</div>
-                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales">
+                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly>
                     <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
                 </li>
 
@@ -383,8 +383,9 @@
                     }
 
                     var title = document.createElement("input");
+                    title.value = title.title = doc.name;
+                    title.type = "text"; title.readonly = true;
                     title.classList.add("form-control card-field-title");
-                    title.type = "text"; title.value = title.title = doc.name;
 
                     var details = document.createElement("span");
                     details.innerText = "Details";
