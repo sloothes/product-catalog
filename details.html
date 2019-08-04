@@ -37,7 +37,7 @@
 
         <div id="preview-info">
             <div style="width:49%;display:inline-block;">
-                <img id="product-preview" style="max-width:100%;height:600px;margin:auto;">
+                <img id="product-preview" style="width:100%;height:600px;margin:auto;">
                 <script>
                     (function(){
                         const productPreview = $("img#product-preview").get(0);
@@ -51,15 +51,16 @@
                 </script>
             </div>
 
-            <div>
-                <div id="product-description-panel" class="well" style="height:250px;margin-bottom:20px;background:none;">
-                    <h4 style="margin-top:0px;">Description:</h4>
-                    <div id="product-description" style="width:100%;height:180px;overflow:auto;border:none;background:none;"></div>
-                </div>
+            <div style="width:49%;display:inline-block;float:right;">
+
             </div>
 
         </div>
 
+        <div id="product-description-pane" class="well" style="height:250px;margin-bottom:20px;background:none;">
+            <h4 style="margin-top:0px;">Description:</h4>
+            <div id="product-description" style="width:100%;height:100%;overflow:auto;border:none;background:none;"></div>
+        </div>
 
 </div>
 
