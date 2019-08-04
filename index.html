@@ -44,6 +44,21 @@
         vertical-align:middle !important;
     }
 
+    .card-field-price {
+        font-size:3rem;
+        font-weight:bold;
+        font-family:sans-serif;
+    }
+
+    .card-field-title {
+        font-size:2rem;
+        font-weight:normal;
+        font-family:sans-serif;
+        max-height:6rem;
+        overflow:hidden;
+        text-overflow:ellipsis;
+    }
+
     #catalog-section {
         overflow:auto;
         background-color:#000;
@@ -68,7 +83,7 @@
     <div id="catalog-items-panel" class="well" style="width:100%;margin:0;">
 
         <h4 style="color:#fff;">My products:
-            <div id="counter" class="pull-right small" style="margin-top:4px;color:#ddd;">
+            <div id="counter-right-top" class="pull-right small items-counter" style="margin-top:4px;color:#ddd;">
                 <span class="from">zero</span>
                 to <span class="upto">zero</span>
                 of <span class="count">none</span>
@@ -90,36 +105,41 @@
             </div>
 
             <div id="products-display" class="well">
-                <li class="well product-card"></li>
-                <li class="well product-card"></li>
-                <li class="well product-card"></li>
-                <li class="well product-card">
+
+                <li class="well product-card demo-card">
                     <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
-                    <div class="field-price" style="font-size:3rem;font-weight:bold;font-family:sans-serif;">22.99&nbsp;&thorn;</div>
-                    <div class="field-title" style="font-size:2rem;font-weight:normal;font-family:sans-serif;max-height:6rem;overflow:hidden;text-overflow:ellipsis;">Sed ac metus fermentum nisi lacinia sodales</div>
-                    <a class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
+                    <div class="card-field-price">22.99&nbsp;&thorn;</div>
+                    <div class="card-field-title">Sed ac metus fermentum nisi lacinia sodales</div>
+                    <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
                 </li>
-                <li class="well product-card"></li>
-                <li class="well product-card"></li>
-                <li class="well product-card"></li>
-                <li class="well product-card"></li>
-                <li class="well product-card"></li>
-                <li class="well product-card"></li>
-                <li class="well product-card">
+
+                <li class="well product-card demo-card">
                     <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
-                    <div class="field-price" style="font-size:3rem;font-weight:bold;font-family:sans-serif;">354.49&nbsp;&thorn;</div>
-                    <div class="field-title" style="font-size:2rem;font-weight:normal;font-family:sans-serif;max-height:6rem;overflow:hidden;text-overflow:ellipsis;">Sed ac metus fermentum nisi lacinia sodales</div>
-                    <a class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
+                    <div class="card-field-price">354.00&nbsp;&thorn;</div>
+                    <div class="card-field-title">Sed ac metus fermentum nisi lacinia sodales</div>
+                    <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
                 </li>
-                <li class="well product-card"></li>
-                <li class="well product-card"></li>
-                <li class="well product-card"></li>
+
+                <li class="well product-card demo-card">
+                    <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
+                    <div class="card-field-price">452.00&nbsp;&thorn;</div>
+                    <div class="card-field-title">Sed ac metus fermentum nisi lacinia sodales</div>
+                    <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
+                </li>
+
+                <li class="well product-card demo-card">
+                    <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
+                    <div class="card-field-price">12.99&nbsp;&thorn;</div>
+                    <div class="card-field-title">Sed ac metus fermentum nisi lacinia sodales</div>
+                    <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
+                </li>
+
             </div>
 
             <div style="margin:10px auto 10px auto;height:35px;max-width:350px;">
                 <li class="btn btn-primary btn-white-outline first-page-btn pull-left" style="margin-right:5px;">First</li>
                 <li class="btn btn-primary btn-white-outline get-prev-group-btn pull-left">&#9668;&#9668;</li>
-                <div id="counter" class="small" style="width:fit-content;display:inline;height:35px;margin-top:4px;color:#ddd;">
+                <div id="counter" class="small items-counter" style="width:fit-content;display:inline;height:35px;margin-top:4px;color:#ddd;">
                     <span class="from">zero</span> to <span class="upto">zero</span> of <span class="count">none</span>
                 </div>
                 <li class="btn btn-primary btn-white-outline last-page-btn pull-right" style="margin-left:5px;">Last</li>
@@ -161,16 +181,16 @@
 
 //  const VERSION = 1;
     const NAME = "PRODUCTS";
-    var PRODUCTS = new zango.Db( NAME, {
+    var db = new zango.Db( NAME, {
         products:   true,
         snapshots:  true,
         multiplex:  true,
     });
 
-    PRODUCTS.open(function(err, database){
+    db.open(function(err, database){
         if (err) console.error(err);
     }).then( function(){
-        debugMode && console.log(`${PRODUCTS.name} (v${PRODUCTS.version}) opened.`);
+        debugMode && console.log(`${db.name} (v${db.version}) opened.`);
     }).catch(function(err){
         console.error(err);
     });
@@ -179,12 +199,8 @@
 
 <script>
 
-    const productsDisplay = document.getElementById("products-display");
-    const catalogItemsPanel = document.getElementById("catalog-items-panel");
-    const productCatalogPanel = document.getElementById("product-catalog-panel");
-    const productCatalogPager = document.getElementById("product-catalog-pager");
-
-    function productCardTemplate(){
+/*
+    function productCardTemplateDemo(){
 
         var card = document.createElement("li");
         card.classList.add("well", "product-card");
@@ -200,9 +216,9 @@
         price.style.cssText = "font-size:3rem;font-weight:bold;font-family:sans-serif;";
 
         var title = document.createElement("div");
-        price.classList.add("card-field-title");
-        price.innerText = "Sed ac metus fermentum nisi lacinia sodales.";
-        price.style.cssText = "font-size:2rem;font-weight:normal;font-family:sans-serif;max-height:6rem;overflow:hidden;text-overflow:ellipsis;";
+        title.classList.add("card-field-title");
+        title.innerText = "Sed ac metus fermentum nisi lacinia sodales.";
+        title.style.cssText = "font-size:2rem;font-weight:normal;font-family:sans-serif;max-height:6rem;overflow:hidden;text-overflow:ellipsis;";
 
         var button = document.createElement("span");
         button.innerText = "Details";
@@ -214,7 +230,6 @@
         return card;
     }
 
-/*
     <li class="well product-card">
         <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
         <div class="card-field-price" style="font-size:3rem;font-weight:bold;font-family:sans-serif;">22.99&nbsp;&thorn;</div>
@@ -223,16 +238,234 @@
     </li>
 */
 
-
-
-
-
-
-
-
-
 </script>
 
+<script>
+
+(function(){
+
+    const collection = db.collection("products");
+    debugMode && console.log({"collection":collection});
+
+//  Pager.
+
+    const pager  = document.getElementById("product-catalog-pager");
+    const displayObjects = document.getElementById("products-display");
+    const catalogItemsPanel = document.getElementById("catalog-items-panel");
+    const productCatalogPanel = document.getElementById("product-catalog-panel");
+    const productCatalogPager = document.getElementById("product-catalog-pager");
+
+    var pagebuttons = $(pager).find(".page-btn");
+    var pageslength = $(pager).find(".page-btn").length;
+
+    const firstPageBtn = $(pager).find(".first-page-btn").get(0);
+    const lastPageBtn  = $(pager).find(".last-page-btn").get(0);
+    const prevPageBtn  = $(pager).find(".get-prev-btn").get(0);
+    const nextPageBtn  = $(pager).find(".get-next-btn").get(0);
+    const prevGroupBtn = $(pager).find(".get-prev-group-btn").get(0);
+    const nextGroupBtn = $(pager).find(".get-next-group-btn").get(0);
+
+    const pageSelector = "#product-catalog-pager .page-btn";
+
+    const counter = $(catalogItemsPanel).find("#counter").get(0);
+    const counterRT = $(catalogItemsPanel).find("#counter-right-top").get(0);
+
+    var timeout;
+    var interval;
+    var selectors;
+    var delay = 200;
+
+    const limit = 14;
+
+    var max = 0;
+    var skip = 0;
+    var lastpage = 0;
+    var currentpage = 0;
+    var currentindex = 0;
+
+//  too slow!
+    function count(){
+        var k = skip;
+        return collection.find(selectors)
+        .skip(skip).forEach( 
+            function(doc){ ++k; }, 
+            function(err){ if (err) throw err; }
+        ).catch(function(err){
+            console.error(err);
+        }).then(function(){
+            return k;
+        });
+    }
+
+    function reset(){
+
+        max = 0;
+        skip = 0;
+        lastpage = 0;
+        currentpage = 0;
+        currentindex = 0;
+
+    }
+
+    function init(){
+
+    //  Page buttons numbering.
+        pagebuttons.each(function(i){
+            pagebuttons[i].skip = limit * i;
+            $(pagebuttons[i]).text( i + 1 );
+        });
+
+    //  Current button setup.
+        pagebuttons.removeClass("btn-primary");
+        var currentButton = pagebuttons.get(0);
+        $(currentButton).addClass("btn-primary");
+
+    //  Clear listed objects.
+        $(displayObjects).children().remove();
+
+    }
+
+    function get_items(){
+
+        collection.find(selectors).skip(skip)
+        .limit(limit).toArray(function(err){
+            if (err) throw err;
+        }).then(function(docs){
+
+            $(displayObjects).children().remove();
+            debugMode && console.log({"docs":docs});
+
+            caches.open("thumbnails").then(function(cache){
+
+                docs.forEach(function(doc){
+
+                    var card = document.createElement("li");
+                    card.data = doc; // optional!
+                    card.classList.add("well", "product-card");
+
+                    var img = new Image();
+                    img.classList.add("thumbnail");
+                    img.style.cssText = "width:auto;height:50%;margin:0 auto 10px auto;";
+                    var url = `https://i.imgur.com/${doc.preview}s.jpg`;
+
+                    cache.match(url).then(function(response){
+                        if (response) return response.blob();
+                        else return cache.add(url).then(function(){
+                            return cach.match(url).then(function(response){
+                                return response.blob();
+                            });
+                        });
+                    }).then(function(blob){
+                        if (blob) $(img).on("load", function(){
+                            URL.revokeObjectURL(img.src);
+                        }).attr({src:URL.createObjectURL(blob)});
+                        else img.src = url; // `https://i.imgur.com/${doc.preview}s.jpg`;
+                    });
+
+
+                    var price = document.createElement("div");
+                    price.classList.add("card-field-price");
+                    if ( doc.price == null ) {
+                        price.innerText = price.title = "no value";
+                    } else { 
+                        price.innerText = price.title = round(doc.price, 2).toString() + "&nbsp;&thorn;";
+                    }
+
+                    var title = document.createElement("div");
+                    title.classList.add("card-field-title");
+                    title.innerText = title.title = doc.name;
+
+                    var details = document.createElement("span");
+                    details.innerText = "Details";
+                    details.product_UUID = doc.uuid; // important!
+                    details.classList.add("btn", "btn-info", "btn-white-outline");
+                    details.style.cssText = "width:50%;background-color:#42bcf9;";
+
+                    $(details).on("click", function(){
+                    //  TODO: Open a sale page with details of the product. 
+                        console.log({"product_UUID":details.product_UUID});
+                    });
+
+                    $(card).append(img, price, title, details);
+
+                    $(displayObjects).append( card );
+
+                });
+
+            }).catch(function(err){
+                console.error(err);
+            });
+
+        }).catch(function(err){
+            console.error(err);
+        });
+
+    }
+
+    function pagerClicked(){
+
+    //  Get last page.
+        lastpage = parseInt( max / limit );
+
+    //  Get current page.
+        currentpage = parseInt( skip / limit );
+
+    //  Get current index.
+        currentindex = parseInt( currentpage % pageslength );
+
+    //  Page buttons numbering.
+        var num = parseInt( currentpage / pageslength ) * pageslength;
+
+        pagebuttons.each(function(i){
+            var page = num + i;
+            pagebuttons[i].skip = limit * page; // important!
+            $(pagebuttons[i]).text( page + 1 ); // important!
+        });
+
+    //  Current button setup.
+        pagebuttons.removeClass("btn-primary");
+        var currentButton = pagebuttons.get( currentindex );
+        $(currentButton).addClass("btn-primary");
+
+    //  Display info.
+
+        if ( max == 0 )
+            $(counter).find("#from").text("-"); 
+        else if ( skip == max )
+            $(counter).find("#from").text(skip);
+        else
+            $(counter).find("#from").text(skip + 1);
+
+        if ( max == 0 )
+            $(counter).find("#upto").text("-");
+        else if ( skip + limit > max )
+            $(counter).find("#upto").text( max );
+        else
+            $(counter).find("#upto").text(skip + limit);
+
+        $(counter).find("#count").text(max);
+
+        debugMode && console.log({"max":max, "skip":skip, "index": currentindex});
+
+        if ( max && skip < max ) {
+
+            clearTimeout(interval);
+            interval = setTimeout( get_items, delay );
+
+        }
+
+    }
+
+
+
+
+//  Signals.
+
+    var Signal = signals.Signal;
+
+
+//  For performance we count items only when we ask last page 
+//  or we change droplist selectors. Not need to count on backward.
 
 
 
@@ -262,6 +495,15 @@
 
 
 
+
+
+
+
+    get_items();
+
+})();
+
+</script>
 
 
 </body>
