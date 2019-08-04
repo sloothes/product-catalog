@@ -352,9 +352,9 @@
                 docs.forEach(function(doc){
 
                     var card = document.createElement("li");
-                    card.id = doc._id; // optional!
-                    card.data = doc;   // optional!
+                    card.id = doc._id; card.data = doc; // optional!
                     card.classList.add("well", "product-card");
+                    card.style.cssText = "vertical-align:middle!important;";
 
                     var img = new Image();
                     img.classList.add("thumbnail");
