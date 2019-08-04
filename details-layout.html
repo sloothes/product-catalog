@@ -63,21 +63,6 @@
         border:thin solid #ccc;
     }
 
-    @media all and ( max-width: 640px ) {
-
-        #product-preview-pane {
-            width:100%;
-            height:400px;
-        }
-
-        #product-info-pane {
-            width:100%;
-            height:400px;
-            float:unset;
-        }
-
-    }
-
     #product-preview {
         width:auto;
         margin:auto;
@@ -94,6 +79,29 @@
         max-height:600px;
     }
 
+    @media all and ( max-width: 640px ) {
+
+        #product-preview-pane {
+            width:100%;
+            height:400px;
+        }
+
+        #product-info-pane {
+            width:100%;
+            height:400px;
+            float:unset;
+        }
+
+        #product-info {
+            height:100%;
+        }
+
+        #product-preview {
+            height:100%;
+        }
+
+    }
+
 </style>
 
 <body style="overflow:auto;">
@@ -107,7 +115,7 @@
     </div>
 
     <div id="product-preview-pane">
-        <img id="product-preview" style="">
+        <img id="product-preview">
         <script>
             (function(){
                 const productPreview = $("img#product-preview").get(0);
