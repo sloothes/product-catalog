@@ -44,6 +44,20 @@
         min-height:250px;;
     }
 
+    @media all and ( max-width: 640px ) {
+
+        #product-preview-pane {
+            width:100%;
+            height:400px;
+        }
+
+        #product-info-pane {
+            width:100%;
+            height:400px;
+        }
+
+    }
+
 </style>
 
 <body style="overflow:auto;">
@@ -52,11 +66,11 @@
 
 <div class="container well">
 
-    <div class="helpers-header newitem-header" style="margin-bottom:20px;">
+    <div id="product-title-pane" style="margin-bottom:20px;">
         <input type="text" id="product-title" class="form-control text-center x-large product-title-field" placeholder="untitled product" readOnly>
     </div>
 
-    <div style="max-width:100%;min-width:49%;display:inline-block;border:thin solid #ccc;">
+    <div id="product-preview-pane" style="max-width:100%;min-width:49%;display:inline-block;border:thin solid #ccc;">
         <img id="product-preview" style="width:auto;min-height:400px;max-height:600px;margin:auto;">
         <script>
             (function(){
@@ -71,10 +85,9 @@
         </script>
     </div>
 
-    <div style="max-width:100%;min-width:49%;display:inline-block;float:right;border:thin solid #ccc;">
+    <div id="product-info-pane" style="max-width:100%;min-width:49%;display:inline-block;float:right;border:thin solid #ccc;">
         <div id="product-info" style="width:100%;min-height:400px;max-height:600px;margin:auto;"></div>
     </div>
-
 
     <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
         <div class="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
