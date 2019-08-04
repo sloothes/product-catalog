@@ -122,20 +122,21 @@
     </div>
 
     <div id="product-preview-pane">
+
         <div style="text-align:center;overflow:auto;">
             <img id="product-preview" src="/img/no-image-avaliable-200x200.png">
-            <script>
-                (function(){
-                    const productPreview = $("img#product-preview").get(0);
-                    $(productPreview).on("load", function(){
-                        if ( this.src.startsWith("blob:") ) {
-                            window.URL.revokeObjectURL(this.src); // important!
-                            debugMode && console.log("revoked", this.src);
-                        }
-                    });
-                })();
-            </script>
-        <div>
+        </div>
+        <script>
+            (function(){
+                const productPreview = $("img#product-preview").get(0);
+                $(productPreview).on("load", function(){
+                    if ( this.src.startsWith("blob:") ) {
+                        window.URL.revokeObjectURL(this.src); // important!
+                        debugMode && console.log("revoked", this.src);
+                    }
+                });
+            })();
+        </script>
 
         <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
             <div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
