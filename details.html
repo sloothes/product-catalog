@@ -310,6 +310,12 @@
         title.value = product.name;
         description.innerText = product.description;
 
+        if ( product.price == null ) {
+            price.value = price.title = "no value";
+        } else { 
+            price.value = price.title = product.price.toFixed(2);
+        }
+
         caches.open("products").then(function(cache){
             var url = `//i.imgur.com/${product.preview}.jpg`
             cache.match(url).then(function(response){
