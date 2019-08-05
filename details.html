@@ -109,7 +109,7 @@
         min-width:49%;
         max-width:100%;
         display:inline-block;
-        border:thin solid #ccc;
+    /*  border:thin solid #ccc; */
     }
 
     #product-purcashe {
@@ -118,6 +118,7 @@
         height:600px;
         min-height:400px;
         max-height:600px;
+        font-family:sans-serif;
     }
 
     @media all and ( max-width: 640px ) {
@@ -203,10 +204,7 @@
 
     <div id="product-purcashe-pane">
         <div id="product-purcashe">
-            <hr/>
-            <div style="font-family:sans-serif;">
-                <span style="font-weight:bold;font-size:2rem;">Product code: </span><span id="product-uuid"></span>
-            </div>
+            <div><span style="font-weight:bold;">Product code: </span><span id="product-uuid"></span></div>
             <hr/>
             <input type="text" id="product-value" class="form-control text-center x-large product-value-field" placeholder="0.00" value="0.00" readOnly>
             <hr/>
@@ -315,8 +313,8 @@
     //  const product = store.remove("Product");
 
         title.value = product.name;
+        code.innerText = product.uuid;
         description.innerText = product.description;
-        code.innerText = "Product code: " + product.uuid;
 
         if ( product.price == null ) {
             price.value = price.title = "00.00";
