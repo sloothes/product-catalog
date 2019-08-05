@@ -214,7 +214,7 @@
 
     <div id="product-purcashe-pane">
         <div id="product-purcashe">
-            <div><span style="font-weight:bold;">Product code: </span><span id="product-uuid"></span></div>
+            <div><span style="font-weight:bold;">Product ID: </span><span id="product-uuid"></span></div>
             <hr/>
             <input type="text" id="product-value" class="form-control text-center x-large product-value-field" placeholder="0.00" value="0.00" readOnly>
             <hr/>
@@ -222,6 +222,11 @@
             <hr/>
             <div style="text-align:center;">
                 <div id="purcash-button" class="btn btn-info btn-white-outline">Purcash</div>
+            </div>
+            <hr/>
+            <div style="text-align:center;">
+                <h4 style="font-weight:bold;">Designer:</h4>
+                <div id="product-design"></div>
             </div>
             <hr/>
         </div>
@@ -316,6 +321,7 @@
     const code = document.getElementById("product-uuid");
     const title = document.getElementById("product-title");
     const price = document.getElementById("product-value");
+    const design = document.getElementById("product-design");
     const preview = document.getElementById("product-preview");
     const snapshots = document.getElementById("product-snapshots");
     const description = document.getElementById("description-tab");
@@ -330,6 +336,8 @@
 
         title.value = product.name;
         code.innerText = product.uuid;
+        design.innerText = product.owner;
+
         $(".product-description").text(product.description);
 
         if ( product.price == null ) {
