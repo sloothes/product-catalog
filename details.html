@@ -181,7 +181,7 @@
 
     </div>
 
-    <div id="product-info-pane">
+    <div id="product-purcashe-pane">
         <div id="product-info"></div>
     </div>
 
@@ -191,6 +191,7 @@
             <ul class="nav nav-tabs nav-pills" style="width:100%;overflow-x:auto;overflow-y:hidden;">
 
                 <li class="active" role="presentation"><a href="#description-tab" data-toggle="pill" class="pills right-pill right-pill-description">Description</a></li>
+                <li class role="presentation"><a href="#information-tab" data-toggle="pill" class="pills right-pill right-pill-info">General info</a></li>
                 <li class role="presentation"><a href="#outfits-tab" data-toggle="pill" class="pills right-pill right-pill-outfits">Outfit</a></li>
                 <li class role="presentation"><a href="#texture-tab" data-toggle="pill" class="pills right-pill right-pill-outfits">Texture</a></li>
                 <li class role="presentation"><a href="#product-tab" data-toggle="pill" class="pills right-pill right-pill-product">Product</a></li>
@@ -202,6 +203,7 @@
         <div class="tab-content">
 
             <div id="description-tab" class="component-pane tab-pane fade in active"></div>
+            <div id="information-tab" class="component-pane tab-pane fade"></div>
             <div id="outfits-tab" class="component-pane tab-pane fade"></div>
             <div id="texture-tab" class="component-pane tab-pane fade"></div>
             <div id="product-tab" class="component-pane tab-pane fade"></div>
@@ -269,17 +271,18 @@
     const title = document.getElementById("product-title");
     const preview = document.getElementById("product-preview");
     const snapshots = document.getElementById("product-snapshots");
-    const descriptionTab = document.getElementById("description-tab");
+    const description = document.getElementById("description-tab");
     const previewContainer = document.getElementById("preview-container");
 
     if ( store("Product") ) {
 
         const product = store("Product");
+        const product_UUID = product.uuid;
         debugMode && console.log(product);
     //  const product = store.remove("Product");
 
         title.value = product.name;
-        descriptionTab.innerText = product.description;
+        description.innerText = product.description;
 
         caches.open("products").then(function(cache){
             var url = `//i.imgur.com/${product.preview}.jpg`
