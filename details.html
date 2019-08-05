@@ -274,8 +274,9 @@
 
     if ( store("Product") ) {
 
-        const product = store.remove("Product");
+        const product = store("Product");
         debugMode && console.log(product);
+    //  const product = store.remove("Product");
 
         title.value = product.name;
         descriptionTab.innerText = product.description;
