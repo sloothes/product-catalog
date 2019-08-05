@@ -51,6 +51,7 @@
     }
 
     #product-title {
+        color:#999;
         border: none;
         background: none;
         box-shadow: none;
@@ -245,7 +246,7 @@
     const db = new zango.Db( "PRODUCTS", {
         products:   true,
         snapshots:  true,
-        multiplex:  true,
+    //  multiplex:  true,
     });
 
 </script>
@@ -260,10 +261,10 @@
     const title = document.getElementById("product-title");
     const preview = document.getElementById("product-preview");
     const snapshots = document.getElementById("product-snapshots");
-    const tabDescription = document.getElementById("description-tab");
+    const descriptionTab = document.getElementById("description-tab");
 
-    title.innerText = product.name;
-    tabDescription.innnerText = product.description;
+    title.value = product.name;
+    descriptionTab.innerText = product.description;
 
     caches.open("products").then(function(cache){
         var url = `https://i.imgur.com/${product.preview}.jpg`
@@ -280,10 +281,52 @@
         });
     });
 
+    caches.open("thumbnails").then(function(cache){
+        $(snapshots).children().remove();
+        product.snapshots.forEach(function(id){
+
+            var background = `https://i.imgur.com/${id}s.jpg`;
+            cache.match(background).then(function(response){
+                if (response) return response.blob();
+                else return cache.add(background).then(function(){
+                    return cach.match(background).then(function(response){
+                        return response.blob();
+                    });
+                });
+
+            }).then(function(blob){
+
+                var element = document.createElement("li");
+                element.id = id;
+                element.imageSrc = `https://i.imgur.com/${id}.jpg`;
+                element.thumbnail = `https://i.imgur.com/${id}s.jpg`;
+                element.classList.add(
+                    "btn", "btn-default", 
+                    "btn-white-outline", 
+                    "snapshot-item", 
+                    "product-snapshot-item"
+                );
+
+                element.style.cssText = ``;
 
 
 
+                $(element).on("click", function(){
+                    
+                });
 
+                if (blob) element.style.background = `url(${URL.createObjectURL(blob)})`;
+                else element.src = element.style.background = `url(${background})`;
+
+                return element;
+
+            }).then(function(snapshot){
+                $(snapshots).append(snapshot);
+            });
+
+        });
+
+    });
 
 })();
 
