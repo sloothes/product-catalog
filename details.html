@@ -453,9 +453,9 @@
 
             $(livetestBtn).off(); // important!
 
-            var time = 5 * 60 * 100; // 10 minutes.
-            var msg = `You have ${time} minutes to test<br>`
-                + `this product live in your home page.`;
+            var time = 5 * 60 * 100; // 5 minutes.
+            var msg = `You have ${time/60000} minutes to test this<br>`
+                + `product live in your home page.`;
 
             return bootbox.dialog({
                 buttons: true,
@@ -472,7 +472,7 @@
                                 $(livetestBtn).on("click", function(){
                                     liveTestButtonClicked.dispatch();
                                 });
-                            }, time); // 10 minutes.
+                            }, time); // 5 minutes.
                         //  window.location.pathname = "/home";
                         }
                     },
