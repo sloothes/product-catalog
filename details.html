@@ -208,6 +208,10 @@
             <hr/>
             <input type="text" id="product-value" class="form-control text-center x-large product-value-field" placeholder="0.00" value="0.00" readOnly>
             <hr/>
+            <div class="product-description"></div>
+            <hr/>
+
+
         </div>
     </div>
 
@@ -230,7 +234,7 @@
 
         <div class="tab-content">
 
-            <div id="description-tab" class="component-pane tab-pane fade in active"></div>
+            <div id="description-tab" class="product-description component-pane tab-pane fade in active"></div>
             <div id="outfits-tab" class="component-pane tab-pane fade"></div>
             <div id="texture-tab" class="component-pane tab-pane fade"></div>
             <div id="product-tab" class="component-pane tab-pane fade"></div>
@@ -314,7 +318,7 @@
 
         title.value = product.name;
         code.innerText = product.uuid;
-        description.innerText = product.description;
+        $(".product-description").text(product.description);
 
         if ( product.price == null ) {
             price.value = price.title = "00.00";
