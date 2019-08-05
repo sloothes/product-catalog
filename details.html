@@ -203,9 +203,13 @@
 
     <div id="product-purcashe-pane">
         <div id="product-purcashe">
-        <hr/>
+            <hr/>
+            <div style="font-family:sans-serif;">
+                <span style="font-weight:bold;font-size:2rem;">Product code: </span><span id="product-uuid"></span>
+            </div>
+            <hr/>
             <input type="text" id="product-value" class="form-control text-center x-large product-value-field" placeholder="0.00" value="0.00" readOnly>
-        <hr/>
+            <hr/>
         </div>
     </div>
 
@@ -295,6 +299,7 @@
 (function(){
 
 
+    const code = document.getElementById("product-uuid");
     const title = document.getElementById("product-title");
     const price = document.getElementById("product-value");
     const preview = document.getElementById("product-preview");
@@ -311,6 +316,7 @@
 
         title.value = product.name;
         description.innerText = product.description;
+        code.innerText = "Product code: " + product.uuid;
 
         if ( product.price == null ) {
             price.value = price.title = "00.00";
