@@ -389,7 +389,6 @@
                         else img.src = url; // `https://i.imgur.com/${doc.preview}s.jpg`;
                     });
 
-
                     var price = document.createElement("div");
                     price.classList.add("card-field-price");
                     if ( doc.price == null ) {
@@ -420,7 +419,7 @@
 
 
                         store("Product", doc);  // store product data to localStorage.
-                        window.location.pathname = "/products-catalog/details-layout.html";
+                        window.location.pathname = "/products-catalog/details.html";
 
                     });
 
