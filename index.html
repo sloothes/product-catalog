@@ -38,11 +38,13 @@
     }
 
     .well.product-card { 
+    /*  vertical-align:middle !important;  */
         color: #fff;
         display:inline-block; 
-        height:48%; width:22.8rem;
-    /*  vertical-align:middle !important;  */
+        height:48%; 
+        width:22.8rem;
     }
+
 
     .card-field-price {
         font-size:3rem;
@@ -74,6 +76,16 @@
         max-height:705px;
         text-align:center;
         overflow:auto;
+    }
+
+    @media all and ( max-width: 640px ) {
+
+        .well.product-card { 
+            display:inline-block; 
+            height:65%; 
+            width:100%;
+        }
+
     }
 
 </style>
