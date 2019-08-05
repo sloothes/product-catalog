@@ -272,7 +272,7 @@
 
     if ( store("Product") ) {
 
-        const product = store("Product");
+        const product = store.remove("Product");
         debugMode && console.log(product);
 
         title.value = product.name;
