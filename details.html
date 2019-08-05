@@ -71,10 +71,16 @@
     /*  border:thin solid #ccc; */
     }
 
+    #preview-container {
+        max-width:100%;
+        text-align:center;
+        overflow:auto;
+    }
+
     img#product-preview {
         width:auto;
         margin:auto;
-        min-height:450px;
+        min-height:250px;
         max-height:450px;
     }
 
@@ -133,9 +139,10 @@
 
     <div id="product-preview-pane">
 
-        <div style="max-width:100%;text-align:center;overflow:auto;">
+        <div id="preview-container" style="max-width:100%;text-align:center;overflow:auto;">
             <img id="product-preview" src="/img/no-image-avaliable-200x200.png">
         </div>
+
         <script>
             (function(){
                 const productPreview = $("img#product-preview").get(0);
@@ -263,6 +270,7 @@
     const preview = document.getElementById("product-preview");
     const snapshots = document.getElementById("product-snapshots");
     const descriptionTab = document.getElementById("description-tab");
+    const previewContainer = document.getElementById("preview-container");
 
     title.value = product.name;
     descriptionTab.innerText = product.description;
