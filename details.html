@@ -330,8 +330,7 @@
 
 (function(){
 
-
-    const code = document.getElementById("product-uuid");
+    const uuid = document.getElementById("product-uuid");
     const title = document.getElementById("product-title");
     const price = document.getElementById("product-value");
     const design = document.getElementById("product-design");
@@ -340,15 +339,20 @@
     const description = document.getElementById("description-tab");
     const previewContainer = document.getElementById("preview-container");
 
-    if ( store("Product") ) {
+    const purcashBtn = document.getElementById("purcash-button");
+    const wishlistBtn = document.getElementById("wishlist-button");
+    const livetestBtn = document.getElementById("live-test-button");
+    const shoppingCartBtn = document.getElementById("live-test-button");
+
+    if ( store("Product") ) (function(){
 
         const product = store("Product");
+    //  const product = store.remove("Product");
         const product_UUID = product.uuid;
         debugMode && console.log(product);
-    //  const product = store.remove("Product");
 
         title.value = product.name;
-        code.innerText = product.uuid;
+        uuid.innerText = product.uuid;
         design.innerText = product.owner;
 
         $(".product-description").text(product.description);
@@ -437,7 +441,40 @@
 
         });
 
-    }
+        $(purcashBtn).on("click", function(){
+
+            $(purcashBtn).off(); // important!
+
+
+
+
+            var msg = `Purcashe of product ID:${product_UUID}`
+                    + `completed successfully!`;
+
+            return bootbox.dialog({
+                size: "small",
+                className: "middle",
+                closeButton: false,
+                title: `<div class="alert-icon icon-success">`
+                + `</div><h2 style="margin:auto;">Success</h2>`,
+                message: `<div>${msg}</div>`,
+                buttons: { 
+                    success: {
+                        label: "Return to catalog",
+                        className: "btn-success",
+                        callback: function(){ 
+                            //  bootbox.hideAll(); 
+                            window.location.pathname = "/products-catalog";
+                        }
+                    },
+                }
+            });
+
+        })
+
+
+
+    })();
 
 })();
 
