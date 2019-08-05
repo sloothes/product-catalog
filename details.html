@@ -311,7 +311,7 @@
         description.innerText = product.description;
 
         if ( product.price == null ) {
-            price.value = price.title = "no value";
+            price.value = price.title = "--.--";
         } else { 
             price.value = price.title = product.price.toFixed(2);
         }
