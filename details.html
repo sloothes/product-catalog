@@ -61,6 +61,8 @@
         font-weight: bold;
         font-family: sans-serif;
         text-overflow:ellipsis;
+        cursor:context-menu;
+
     }
 
     #product-value {
@@ -311,7 +313,7 @@
         description.innerText = product.description;
 
         if ( product.price == null ) {
-            price.value = price.title = "--.--";
+            price.value = price.title = "00.00";
         } else { 
             price.value = price.title = product.price.toFixed(2);
         }
