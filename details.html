@@ -344,6 +344,8 @@
     const livetestBtn = document.getElementById("live-test-button");
     const shoppingCartBtn = document.getElementById("live-test-button");
 
+    var Signal = signals.Signal;
+
     if ( store("Product") ) (function(){
 
         const product = store("Product");
@@ -441,9 +443,13 @@
 
         });
 
-        $(livetestBtn).on("click", liveTestButtonHandler);
+        var liveTestButtonClicked = new Signal();
+
+        $(livetestBtn).on("click", function(){
+            liveTestButtonClicked.dispatch();
+        });
                                                     
-        function liveTestButtonHandler(){
+        liveTestButtonClicked.add(function(){
 
             $(livetestBtn).off(); // important!
 
@@ -463,7 +469,9 @@
                         callback: function(){ 
                         //  bootbox.hideAll(); 
                             livetestBtn.interval = setTimeout(function(){
-                                $(livetestBtn).on("click", liveTestButtonHandler);
+                                $(livetestBtn).on("click", function(){
+                                    liveTestButtonClicked.dispatch();
+                                });
                             }, time); // 10 minutes.
                         //  window.location.pathname = "/home";
                         }
@@ -471,8 +479,6 @@
                 }
 
             });
-
-
         });
 
         $(purcashBtn).on("click", purcasheButtonClickHandler);
@@ -503,7 +509,7 @@
                     },
                 }
             });
-        });
+        }
 
     })();
 
