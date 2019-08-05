@@ -66,6 +66,7 @@
         height:600px;
         min-width:49%;
         max-width:100%;
+        text-align:center;
         display:inline-block;
     /*  border:thin solid #ccc; */
     }
@@ -332,7 +333,7 @@
             //  Revoke.
                 var objectURL = snapshot.style["background-image"]
                              .replace("url(", "").replace(")", "");
-                debugMode && console.log("objectURL:", objectURL);
+                debugMode && console.log("revoked", objectURL);
 
                 if ( objectURL.startsWith("blob:") ) {
                     URL.revokeObjectUrl( objectURL );
