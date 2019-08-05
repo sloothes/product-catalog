@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="description" contents="">
+
+    <title>Product Details layout (v1.1)</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootbox-dialoges.css">
+    <link rel="stylesheet" href="/css/meter.css">
+    <link rel="stylesheet" href="/css/spinner.css">
+    <link rel="stylesheet" href="/css/alerts.css">
+    <link rel="stylesheet" href="/css/anywhere3d.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- link rel="stylesheet" href="/style.css" -->
+
+    <script src="/js/loadjs.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="/socketcluster.js"></script>
+    <script src="/sc-codec-min-bin.js"></script>
+
+</head>
+
+<body>
+
+<style>
+    
+    body {
+        overflow:auto;
+    }
+
+    .snapshot-item {
+        width:85px;
+        height:85px;
+        margin:4px;
+        border:thin solid #ccc;
+        background-size: contain;
+        background-position:50% 50%;
+        background-repeat:no-repeat;
+    }
+
+    .tab-pane {
+        width:100%;
+        min-height:250px;;
+    }
+
+    #product-title {
+        border: none;
+        background: none;
+        box-shadow: none;
+        font-size: 3rem;
+        font-weight: bold;
+        font-family: sans-serif;
+        text-overflow:ellipsis;
+    }
+
+    #product-preview-pane {
+        width:49%;
+        height:600px;
+        min-width:49%;
+        max-width:100%;
+        display:inline-block;
+        border:thin solid #ccc;
+    }
+
+    img#product-preview {
+        width:auto;
+        margin:auto;
+        min-height:450px;
+        max-height:450px;
+    }
+
+    #product-info-pane {
+        width:49%;
+        height:600px;
+        float:right;
+        min-width:49%;
+        max-width:100%;
+        display:inline-block;
+        border:thin solid #ccc;
+    }
+
+    #product-info {
+        width:100%;
+        margin:auto;
+        height:600px;
+        min-height:400px;
+        max-height:600px;
+    }
+
+    @media all and ( max-width: 640px ) {
+
+        #product-preview-pane {
+            width:100%;
+        }
+
+        #product-info-pane {
+            width:100%;
+            float:unset;
+            height:400px;
+            min-height:400px;
+            max-height:unset;
+
+        }
+
+        #product-info {
+            height:100%;
+        }
+
+    }
+
+    #description-tab {
+        padding:30px;
+    }
+
+</style>
+
+<section class="mbr-section" id="details-section">
+
+<div class="container well">
+
+    <div id="product-title-pane" style="margin-bottom:20px;">
+        <input type="text" id="product-title" class="form-control text-center x-large product-title-field" placeholder="untitled product" readOnly>
+    </div>
+
+    <div id="product-preview-pane">
+
+        <div style="max-width:100%;text-align:center;overflow:auto;">
+            <img id="product-preview" src="/img/no-image-avaliable-200x200.png">
+        </div>
+        <script>
+            (function(){
+                const productPreview = $("img#product-preview").get(0);
+                $(productPreview).on("load", function(){
+                    if ( this.src.startsWith("blob:") ) {
+                        window.URL.revokeObjectURL(this.src); // important!
+                        debugMode && console.log("revoked", this.src);
+                    }
+                });
+            })();
+        </script>
+
+        <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
+            <div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
+                <div id="product-snapshots" class="product-snapshots" style="display:inline-block;width:max-content;text-align:center;">
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="product-info-pane">
+        <div id="product-info"></div>
+    </div>
+
+    <div id="product-tabs-pane">
+
+        <div style="width:100%;margin-bottom:20px;">
+            <ul class="nav nav-tabs nav-pills" style="width:100%;overflow-x:auto;overflow-y:hidden;">
+
+                <li class="active" role="presentation"><a href="#description-tab" data-toggle="pill" class="pills right-pill right-pill-description">Description</a></li>
+                <li class role="presentation"><a href="#outfits-tab" data-toggle="pill" class="pills right-pill right-pill-outfits">Outfit</a></li>
+                <li class role="presentation"><a href="#texture-tab" data-toggle="pill" class="pills right-pill right-pill-outfits">Texture</a></li>
+                <li class role="presentation"><a href="#product-tab" data-toggle="pill" class="pills right-pill right-pill-product">Product</a></li>
+                <!-- li class role="presentation"><a href="#edit-tab" data-toggle="pill" class="pills right-pill right-pill-edit">Edit</a></li -->
+
+            </ul>
+        </div>
+
+        <div class="tab-content">
+
+            <div id="description-tab" class="component-pane tab-pane fade in active"></div>
+            <div id="outfits-tab" class="component-pane tab-pane fade"></div>
+            <div id="texture-tab" class="component-pane tab-pane fade"></div>
+            <div id="product-tab" class="component-pane tab-pane fade"></div>
+            <!--div id="edit-tab" class="component-pane tab-pane fade"></div -->
+
+        </div>
+
+    </div>
+
+    <div id="additional-tab-pane">
+
+        <div style="width:100%;margin-bottom:20px;">
+            <ul class="nav nav-tabs nav-pills" style="width:100%;overflow:hidden;">
+                <li class="active" role="presentation" style="width:100%"><a href="#additional-options-tab" data-toggle="pill" class="pills right-pill right-pill-options">Additional options</a></li>
+            </ul>
+        </div>
+
+        <div class="tab-content">
+            <div id="additional-options-tab" class="component-pane tab-pane fade in active"></div>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<script>
+
+    debugMode = true;
+
+</script>
+
+<script src="/js/rawinflate.js"></script>
+<script src="/js/rawdeflate.js"></script>
+<script src="/js/store2.js"></script>
+<script src="/js/Objectid.js"></script>
+<script src="/js/zangodb.min.js"></script>
+<script src="/js/bootbox.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/DeviceDetector.js"></script>
+<script src="/js/MathDecimalAdjustment.js"></script>
+<script src="/js/watermark.js"></script>
+<script src="/js/validator.js"></script>
+<script src="/js/system.min.js"></script>
+<script src="/js/signals.min.js"></script>
+<script src="/js/validator.min.js"></script>
+<script src="/js/alerts.js"></script>
+
+<script>
+
+    const db = new zango.Db( "PRODUCTS", {
+        products:   true,
+        snapshots:  true,
+        multiplex:  true,
+    });
+
+</script>
+
+<script>
+
+(function(){
+
+    const product = store("Product");
+    debugMode && console.log(product);
+
+    const title = document.getElementById("product-title");
+    const preview = document.getElementById("product-preview");
+    const snapshots = document.getElementById("product-snapshots");
+    const tabDescription = document.getElementById("description-tab");
+
+    title.innerText = product.name;
+    tabDescription.innnerText = product.description;
+
+    caches.open("products").then(function(cache){
+        var url = `https://i.imgur.com/${product.preview}.jpg`
+        cache.match(url).then(function(response){
+            if (response) return response.blob();
+            else return cache.add(url).then(function(){
+                return cach.match(url).then(function(response){
+                    return response.blob();
+                });
+            });
+        }).then(function(blob){
+            if (blob) preview.src = URL.createObjectURL(blob);
+            else preview.src = url;
+        });
+    });
+
+
+
+
+
+
+})();
+
+</script>
+
+
+</body>
+</html>
