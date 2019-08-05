@@ -441,14 +441,48 @@
 
         });
 
-        $(purcashBtn).on("click", function(){
+        $(livetestBtn).on("click", liveTestButtonHandler);
+                                                    
+        function liveTestButtonHandler(){
+
+            $(livetestBtn).off(); // important!
+
+            var time = 5 * 60 * 100; // 10 minutes.
+            var msg = `You have ${time} minutes to test<br>`
+                + `this product live in your home page.`;
+
+            return bootbox.dialog({
+                buttons: true,
+                closeButton: true,
+                className: "middle",
+                message: `<div class="text-center">${msg}</div>`,
+                buttons: { 
+                    test: {
+                        label: "Go and test",
+                        className: "btn-default",
+                        callback: function(){ 
+                        //  bootbox.hideAll(); 
+                            livetestBtn.interval = setTimeout(function(){
+                                $(livetestBtn).on("click", liveTestButtonHandler);
+                            }, time); // 10 minutes.
+                        //  window.location.pathname = "/home";
+                        }
+                    },
+                }
+
+            });
+
+
+        });
+
+        $(purcashBtn).on("click", purcasheButtonClickHandler);
+
+        function purcasheButtonClickHandler (){
 
             $(purcashBtn).off(); // important!
 
-
-
-
-            var msg = `Purcashe of product ID:${product_UUID}`
+            var msg = `Purcashe of product ID<br>`
+                    + `<b>${product_UUID}<b><br>`
                     + `completed successfully!`;
 
             return bootbox.dialog({
@@ -461,18 +495,15 @@
                 buttons: { 
                     success: {
                         label: "Return to catalog",
-                        className: "btn-success",
+                        className: "btn-default",
                         callback: function(){ 
-                            //  bootbox.hideAll(); 
+                        //  bootbox.hideAll(); 
                             window.location.pathname = "/products-catalog";
                         }
                     },
                 }
             });
-
-        })
-
-
+        });
 
     })();
 
