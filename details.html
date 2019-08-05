@@ -263,8 +263,6 @@
 
 (function(){
 
-    const product = store("Product");
-    debugMode && console.log(product);
 
     const title = document.getElementById("product-title");
     const preview = document.getElementById("product-preview");
@@ -272,86 +270,93 @@
     const descriptionTab = document.getElementById("description-tab");
     const previewContainer = document.getElementById("preview-container");
 
-    title.value = product.name;
-    descriptionTab.innerText = product.description;
+    if ( store("Product") ) {
 
-    caches.open("products").then(function(cache){
-        var url = `//i.imgur.com/${product.preview}.jpg`
-        cache.match(url).then(function(response){
-            if (response) return response.blob();
-            else return cache.add(url).then(function(){
-                return cach.match(url).then(function(response){
-                    return response.blob();
-                });
-            });
-        }).then(function(blob){
-            if (blob) preview.src = URL.createObjectURL(blob);
-            else preview.src = url;
-        });
-    });
+        const product = store("Product");
+        debugMode && console.log(product);
 
-    caches.open("thumbnails").then(function(cache){
+        title.value = product.name;
+        descriptionTab.innerText = product.description;
 
-        $(snapshots).children().remove();
-
-        product.snapshots.forEach(function(id){
-
-            var background = `//i.imgur.com/${id}s.jpg`;
-            cache.match(background).then(function(response){
+        caches.open("products").then(function(cache){
+            var url = `//i.imgur.com/${product.preview}.jpg`
+            cache.match(url).then(function(response){
                 if (response) return response.blob();
-                else return cache.add(background).then(function(){
-                    return cach.match(background).then(function(response){
+                else return cache.add(url).then(function(){
+                    return cach.match(url).then(function(response){
                         return response.blob();
                     });
                 });
-
             }).then(function(blob){
+                if (blob) preview.src = URL.createObjectURL(blob);
+                else preview.src = url;
+            });
+        });
 
-                var element = document.createElement("li");
-                element.id = id;  // optional!
-                element.imageSrc = `//i.imgur.com/${id}.jpg`;
-                element.thumbnail = `//i.imgur.com/${id}s.jpg`;
-                element.classList.add("btn", "btn-default", "btn-white-outline", "snapshot-item", "product-snapshot-item");
-            //  element.style.cssText = `background-size:contain;background-position:50% 50%;background-repeat:no-repeat;background-image:url(${background});`;
+        caches.open("thumbnails").then(function(cache){
 
-                if (blob) element.style.cssText = `background-image:url(${URL.createObjectURL(blob)})`;
-                else element.style.cssText = `background-image:url(${background})`;
+            $(snapshots).children().remove();
 
-                $(element).on("click", function(){
-                    caches.open("products").then(function(cache){
-                        cache.match(element.imageSrc).then(function(response){
-                            if (response) return response.blob();
-                            else return cache.add(element.imageSrc).then(function(){
-                                return cach.match(element.imageSrc).then(function(response){
-                                    return response.blob();
-                                });
-                            });
-                        }).then(function(blob){
-                            if (blob) preview.src = URL.createObjectURL(blob);
-                            else preview.src = element.imageSrc;
+            product.snapshots.forEach(function(id){
+
+                var background = `//i.imgur.com/${id}s.jpg`;
+                cache.match(background).then(function(response){
+                    if (response) return response.blob();
+                    else return cache.add(background).then(function(){
+                        return cach.match(background).then(function(response){
+                            return response.blob();
                         });
                     });
+
+                }).then(function(blob){
+
+                    var element = document.createElement("li");
+                    element.id = id;  // optional!
+                    element.imageSrc = `//i.imgur.com/${id}.jpg`;
+                    element.thumbnail = `//i.imgur.com/${id}s.jpg`;
+                    element.classList.add("btn", "btn-default", "btn-white-outline", "snapshot-item", "product-snapshot-item");
+                //  element.style.cssText = `background-size:contain;background-position:50% 50%;background-repeat:no-repeat;background-image:url(${background});`;
+
+                    if (blob) element.style.cssText = `background-image:url(${URL.createObjectURL(blob)})`;
+                    else element.style.cssText = `background-image:url(${background})`;
+
+                    $(element).on("click", function(){
+                        caches.open("products").then(function(cache){
+                            cache.match(element.imageSrc).then(function(response){
+                                if (response) return response.blob();
+                                else return cache.add(element.imageSrc).then(function(){
+                                    return cach.match(element.imageSrc).then(function(response){
+                                        return response.blob();
+                                    });
+                                });
+                            }).then(function(blob){
+                                if (blob) preview.src = URL.createObjectURL(blob);
+                                else preview.src = element.imageSrc;
+                            });
+                        });
+                    });
+
+                    return element;
+
+                }).then(function(snapshot){
+                    $(snapshots).append(snapshot);
+
+                //  Revoke.
+                    var objectURL = snapshot.style["background-image"]
+                                 .replace("url(", "").replace(")", "");
+                    debugMode && console.log("revoked", objectURL);
+
+                    if ( objectURL.startsWith("blob:") ) {
+                        URL.revokeObjectUrl( objectURL );
+                    }
+
                 });
-
-                return element;
-
-            }).then(function(snapshot){
-                $(snapshots).append(snapshot);
-
-            //  Revoke.
-                var objectURL = snapshot.style["background-image"]
-                             .replace("url(", "").replace(")", "");
-                debugMode && console.log("revoked", objectURL);
-
-                if ( objectURL.startsWith("blob:") ) {
-                    URL.revokeObjectUrl( objectURL );
-                }
 
             });
 
         });
 
-    });
+    }
 
 })();
 
