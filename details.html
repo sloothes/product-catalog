@@ -63,6 +63,14 @@
         text-overflow:ellipsis;
     }
 
+    #product-value {
+        outline:0;
+        height:4rem;
+        font-size: 3rem;
+        font-weight: bold;
+        font-family: sans-serif;
+    }
+
     #product-preview-pane {
         width:49%;
         height:600px;
@@ -182,7 +190,11 @@
     </div>
 
     <div id="product-purcashe-pane">
-        <div id="product-purcashe"></div>
+        <div id="product-purcashe">
+
+            <input type="text" id="product-value" class="form-control text-center x-large product-value-field" placeholder="0.00" readOnly>
+
+        </div>
     </div>
 
     <div id="product-tabs-pane">
@@ -272,6 +284,7 @@
 
 
     const title = document.getElementById("product-title");
+    const price = document.getElementById("product-value");
     const preview = document.getElementById("product-preview");
     const snapshots = document.getElementById("product-snapshots");
     const description = document.getElementById("description-tab");
