@@ -19,13 +19,13 @@
     <link rel="stylesheet" href="/css/index.css">
     <!-- link rel="stylesheet" href="/style.css" -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
-
     <script src="/js/loadjs.min.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery-ui.js"></script>
     <script src="/socketcluster.js"></script>
     <script src="/sc-codec-min-bin.js"></script>
+    <script src="/js/DeviceDetector.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
 
 
 </head>
@@ -185,6 +185,9 @@
         //  Add touch gestures to your webapp.
 
             (function(){
+
+                if (isMobile) return;
+
             //  Get a reference to an element
                 var gesture = document.getElementById("product-preview");
 
@@ -259,6 +262,9 @@
         //  Add touch gestures to your webapp.
         /*
             (function(){
+
+                if (isMobile) return;
+
             //  Get a reference to an element
                 var gesture = document.getElementById("product-snapshots");
 
@@ -390,7 +396,6 @@
 <script src="/js/zangodb.min.js"></script>
 <script src="/js/bootbox.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-<script src="/js/DeviceDetector.js"></script>
 <script src="/js/MathDecimalAdjustment.js"></script>
 <script src="/js/watermark.js"></script>
 <script src="/js/validator.js"></script>
