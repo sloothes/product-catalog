@@ -178,7 +178,7 @@
 
     <div id="product-preview-pane">
 
-        <div id="preview-container" style="max-width:100%;text-align:center;overflow:auto;">
+        <div id="preview-container" style="max-width:100%;text-align:center;/*overflow:auto;*/">
             <img id="product-preview" class="hammer-gesture" src="/img/no-image-avaliable-200x200.png">
         </div>
 
@@ -189,7 +189,7 @@
                 const previewContainer = $("#preview-container").get(0);
 
                 if ( window.Hammer && !isMobile )
-                    previewContainer.style.overflow = "hidden";
+                    previewContainer.style["overflow"] = "hidden";
 
                 $(productPreview).on("load", function(){
                     if ( this.src.startsWith("blob:") ) {
@@ -202,9 +202,9 @@
         </script>
 
         <script>
+        /*
         //  hummer.js
         //  Add touch gestures to your webapp.
-        /*
             (function(){
 
                 if (isMobile) return;
