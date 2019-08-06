@@ -19,14 +19,13 @@
     <link rel="stylesheet" href="/css/index.css">
     <!-- link rel="stylesheet" href="/style.css" -->
 
+    <script src="/js/hammer.js"></script>
     <script src="/js/loadjs.min.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery-ui.js"></script>
+    <script src="/js/DeviceDetector.js"></script>
     <script src="/socketcluster.js"></script>
     <script src="/sc-codec-min-bin.js"></script>
-    <script src="/js/DeviceDetector.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
-
 
 </head>
 
@@ -163,6 +162,10 @@
         padding:30px;
     }
 
+    .hammer-gesture {
+        transition:transform 250ms ease-out;
+    }
+
 </style>
 
 <section class="mbr-section" id="details-section">
@@ -176,88 +179,31 @@
     <div id="product-preview-pane">
 
         <div id="preview-container" style="max-width:100%;text-align:center;overflow:hidden;">
-            <img id="product-preview" src="/img/no-image-avaliable-200x200.png" style="transition:transform 250ms ease-out;">
+            <img id="product-preview" class="hammer-gesture" src="/img/no-image-avaliable-200x200.png">
         </div>
 
         <script>
-
-        //  hummer.js
-        //  Add touch gestures to your webapp.
-
             (function(){
 
-                if (isMobile) return;
-
-            //  Get a reference to an element
-                var gesture = document.getElementById("product-preview");
-
-            //  Create a manager to manager the element.
-                var manager = new Hammer.Manager(gesture);
-
-            //  Create a recognizer.
-                var Swipe = new Hammer.Swipe();
-
-            //  Add the recognizer to the manager.
-                manager.add(Swipe);
-
-            //  Declare global variables to swiped correct distance.
-                var deltaX = 0, deltaY = 0;
-
-            //  Subscribe to a desired event.
-                manager.on("swipe", function(e) {
-
-                    deltaX += e.deltaX;
-
-                    var direction = e.offsetDirection;
-                    var translate3d = `translate3d(${deltaX}px, 0, 0)`;
-
-                    if (direction === 4 || direction === 2) {
-                        //  e.target.innerText = deltaX;
-                        e.target.style.transform = translate3d;
-                    }
-
-                });
-
-            })();
-
-        </script>
-
-        <script>
-            (function(){
                 const productPreview = $("img#product-preview").get(0);
+                const previewContainer = $("#preview-container").get(0);
+
+                if ( isMobile )
+                    previewContainer.style.overflow = "auto";
+                else
+                    previewContainer.style.overflow = "hidden";
+
                 $(productPreview).on("load", function(){
                     if ( this.src.startsWith("blob:") ) {
                         window.URL.revokeObjectURL(this.src); // important!
                         debugMode && console.log("revoked", this.src);
                     }
                 });
+
             })();
         </script>
 
-        <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
-            <div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
-                <div id="product-snapshots" class="product-snapshots" style="display:inline-block;width:max-content;text-align:center;transition:transform 250ms ease-out;">
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                </div>
-            </div>
-        </div>
-
         <script>
-
         //  hummer.js
         //  Add touch gestures to your webapp.
         /*
@@ -266,7 +212,7 @@
                 if (isMobile) return;
 
             //  Get a reference to an element
-                var gesture = document.getElementById("product-snapshots");
+                var gesture = document.querySelector("img#product-preview");
 
             //  Create a manager to manager the element.
                 var manager = new Hammer.Manager(gesture);
@@ -299,6 +245,27 @@
         */
         </script>
 
+        <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
+            <div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
+                <div id="product-snapshots" class="product-snapshots hammer-gesture" style="display:inline-block;width:max-content;text-align:center;">
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="product-purcashe-pane">
@@ -386,6 +353,45 @@
 <script>
 
     debugMode = true;
+
+//  hummer.js
+//  Add touch gestures to your webapp.
+
+    (function(){
+
+        if (isMobile) return;
+
+    //  Get a reference to an element
+        var gesture = document.querySelector(".hammer-gesture");
+
+    //  Create a manager to manager the element.
+        var manager = new Hammer.Manager(gesture);
+
+    //  Create a recognizer.
+        var Swipe = new Hammer.Swipe();
+
+    //  Add the recognizer to the manager.
+        manager.add(Swipe);
+
+    //  Declare global variables to swiped correct distance.
+        var deltaX = 0, deltaY = 0;
+
+    //  Subscribe to a desired event.
+        manager.on("swipe", function(e) {
+
+            deltaX += e.deltaX;
+
+            var direction = e.offsetDirection;
+            var translate3d = `translate3d(${deltaX}px, 0, 0)`;
+
+            if (direction === 4 || direction === 2) {
+            //  e.target.innerText = deltaX;
+                e.target.style.transform = translate3d;
+            }
+
+        });
+
+    })();
 
 </script>
 
