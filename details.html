@@ -196,6 +196,39 @@
             });
         </script>
 
+        <script>
+
+            (function (){
+
+                if ( !window.Hammer ) return;
+                if ( window.isMobile ) return;
+
+                const element = $("#preview-container").get(0);
+
+            //  Smoother scroll.
+
+                element.style["scroll-behavior"] = "smooth";
+
+            //  Create a manager to manager the element.
+
+                var manager = new Hammer(element);
+
+            //  Subscribe to a desired event.
+
+                manager.on("swipe", function(e) {
+
+                    if ( e.offsetDirection === 4 || e.offsetDirection === 2 ) {
+
+                        element.scrollLeft -= e.deltaX;
+
+                    }
+
+                });
+
+            })();
+        </script>
+
+
         <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
             <div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
                 <div id="product-snapshots" class="product-snapshots" style="display:inline-block;width:max-content;text-align:center;">
