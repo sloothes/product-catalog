@@ -380,9 +380,14 @@
 
             if ( e.offsetDirection === 4 || e.offsetDirection === 2 ) {
 
-                element.scrollLeft -= e.deltaX;
-
+            //  Smoother scroll.
+                element.scroll({
+                    left: this.scrollLeft - e.deltaX,
+                    behavior: "smooth",
+                });
             }
+
+            //  element.scrollLeft -= e.deltaX;
 
         });
 
