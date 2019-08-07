@@ -187,20 +187,13 @@
         </div>
 
         <script>
-
-            (function(){
-
-                const productPreview = $("img#product-preview").get(0);
-
-                $(productPreview).on("load", function(){
-                    if ( this.src.startsWith("blob:") ) {
-                        window.URL.revokeObjectURL(this.src); // important!
-                        debugMode && console.log("revoked", this.src);
-                    }
-                });
-
-            })();
-
+            $("img#product-preview").on("load", function(){
+                $(this).fadeIn();
+                if ( this.src.startsWith("blob:") ) {
+                    window.URL.revokeObjectURL(this.src); // important!
+                    debugMode && console.log("revoked", this.src);
+                }
+            });
         </script>
 
         <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
@@ -457,6 +450,7 @@
                     else element.style.cssText = `background-image:url(${background})`;
 
                     $(element).on("click", function(){
+                        $(preview).fadeOut();
                         caches.open("products").then(function(cache){
                             cache.match(element.imageSrc).then(function(response){
                                 if (response) return response.blob();
