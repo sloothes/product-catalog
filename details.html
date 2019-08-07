@@ -188,7 +188,7 @@
 
         <script>
             $("img#product-preview").on("load", function(){
-                $(this).fadeIn();
+                $(this).fadeIn(500);
                 if ( this.src.startsWith("blob:") ) {
                     window.URL.revokeObjectURL(this.src); // important!
                     debugMode && console.log("revoked", this.src);
@@ -450,7 +450,6 @@
                     else element.style.cssText = `background-image:url(${background})`;
 
                     $(element).on("click", function(){
-                        $(preview).fadeOut();
                         caches.open("products").then(function(cache){
                             cache.match(element.imageSrc).then(function(response){
                                 if (response) return response.blob();
@@ -460,8 +459,11 @@
                                     });
                                 });
                             }).then(function(blob){
-                                if (blob) preview.src = URL.createObjectURL(blob);
-                                else preview.src = element.imageSrc;
+                                $(preview).fadeOut(250);
+                                setTimeout(function(){
+                                    if (blob) preview.src = URL.createObjectURL(blob);
+                                    else preview.src = element.imageSrc;
+                                }, 250);
                             });
                         });
                     });
