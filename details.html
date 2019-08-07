@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <meta name="description" contents="">
 
-    <title>Product Details layout (v1.2)</title>
+    <title>Product Details layout (v1.3)</title>
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootbox-dialoges.css">
@@ -182,8 +182,8 @@
 
     <div id="product-preview-pane">
 
-        <div id="preview-container" style="max-width:100%;text-align:center;/*overflow:auto;*/">
-            <img id="product-preview" class="hammer-gesture" src="/img/no-image-avaliable-200x200.png">
+        <div id="preview-container" style="max-width:100%;text-align:center;">
+            <img id="product-preview" src="/img/no-image-avaliable-200x200.png">
         </div>
 
         <script>
@@ -191,10 +191,6 @@
             (function(){
 
                 const productPreview = $("img#product-preview").get(0);
-                const previewContainer = $("#preview-container").get(0);
-
-                if ( window.Hammer && !isMobile )
-                    previewContainer.style["overflow"] = "hidden";
 
                 $(productPreview).on("load", function(){
                     if ( this.src.startsWith("blob:") ) {
@@ -207,53 +203,9 @@
 
         </script>
 
-        <script>
-
-        //  hummer.js
-        //  Swipe mouse scrolling on desktop.
-        //  Add touch gestures to your webapp.
-
-            (function(){
-
-                if (isMobile) return;
-
-                if ( window.Hammer && !isMobile ) {
-
-                //  Get a reference to an element
-                    var element = $("#product-preview").get(0);
-
-                //  Create a manager to manager the element.
-                    var manager = new Hammer(element);
-
-                //  Declare global variables to swiped correct distance.
-                    var dx = 0, dy = 0;
-
-                //  Subscribe to a desired event.
-                    manager.on("swipe", function(e) {
-                        debugMode && console.log(e);
-
-                        dx += e.deltaX;
-
-                        var direction = e.offsetDirection;
-                        var translate3d = `translate3d(${dx}px, 0, 0)`;
-
-                        if (direction === 4 || direction === 2) {
-                        //  e.target.style.transform = translate3d;
-                        //  Use the element but not the e.target.
-                            element.style.transform = translate3d;
-                        }
-
-                    });
-
-                }
-
-            })();
-
-        </script>
-
         <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
             <div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
-                <div id="product-snapshots" class="product-snapshots hammer-gesture" style="display:inline-block;width:max-content;text-align:center;">
+                <div id="product-snapshots" class="product-snapshots" style="display:inline-block;width:max-content;text-align:center;">
                     <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
                     <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
                     <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
@@ -273,58 +225,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        (function(){
-            if ( window.Hammer && !isMobile ) 
-                $("#product-snapshots-container").get(0).style["overflow"] = "hidden";
-        })();
-    </script>
-
-    <script>
-
-        (function(){
-
-            if ( isMobile ) return;
-
-        //  hummer.js (Touch Emulator)
-        //  Emulate touch on a desktop.
-        //  Swipe mouse scrolling on desktop.
-        //  Add touch gestures to your webapp.
-
-            if ( window.Hammer && !isMobile ) {
-
-            //  Get a reference to an element
-                var element = $("#product-snapshots").get(0);
-
-            //  Create a manager to manager the element.
-                var manager = new Hammer(element);
-
-            //  Declare global variables to swiped correct distance.
-                var dx = 0, dy = 0;
-
-            //  Subscribe to a desired event.
-                manager.on("swipe", function(e) {
-                    debugMode && console.log(e);
-
-                    dx += e.deltaX;
-
-                    var direction = e.offsetDirection;
-                    var translate3d = `translate3d(${dx}px, 0, 0)`;
-
-                    if (direction === 4 || direction === 2) {
-                    //  e.target.style.transform = translate3d;
-                    //  Use the element but not the e.target.
-                        element.style.transform = translate3d;
-                    }
-
-                });
-
-            }
-
-         })();
-
-    </script>
 
     <div id="product-purcashe-pane">
         <div id="product-purcashe">
@@ -494,6 +394,9 @@
     const snapshots = document.getElementById("product-snapshots");
     const description = document.getElementById("description-tab");
     const previewContainer = document.getElementById("preview-container");
+
+    SwipeMouseScrolling(preview);
+    SwipeMouseScrolling(snapshots);
 
     const purcashBtn = document.getElementById("purcash-button");
     const wishlistBtn = document.getElementById("wishlist-button");
@@ -673,6 +576,109 @@
 
 </script>
 
+
+
+
+    
+    
+    
+    
+    
+    
+    
+<script>
+/*
+
+    //  hummer.js
+    //  Swipe mouse scrolling on desktop.
+    //  Add touch gestures to your webapp.
+
+    (function(){
+
+        if (isMobile) return;
+
+        const previewContainer = $("#preview-container").get(0);
+
+        if ( window.Hammer && !isMobile ) {
+
+            previewContainer.style["overflow"] = "hidden";
+
+            //  Get a reference to an element
+            var element = $("#product-preview").get(0);
+
+            //  Create a manager to manager the element.
+            var manager = new Hammer(element);
+
+            //  Declare global variables to swiped correct distance.
+            var dx = 0, dy = 0;
+
+            //  Subscribe to a desired event.
+            manager.on("swipe", function(e) {
+                debugMode && console.log(e);
+
+                dx += e.deltaX;
+
+                var direction = e.offsetDirection;
+                var translate3d = `translate3d(${dx}px, 0, 0)`;
+
+                if (direction === 4 || direction === 2) {
+                    //  e.target.style.transform = translate3d;
+                    //  Use the element but not the e.target.
+                    element.style.transform = translate3d;
+                }
+
+            });
+
+        }
+
+    })();
+*/
+
+/*
+    (function(){
+
+        if ( isMobile ) return;
+
+        //  hummer.js (Touch Emulator)
+        //  Emulate touch on a desktop.
+        //  Swipe mouse scrolling on desktop.
+        //  Add touch gestures to your webapp.
+
+        if ( window.Hammer && !isMobile ) {
+
+            $("#product-snapshots-container").get(0).style["overflow"] = "hidden";
+
+            //  Get a reference to an element
+            var element = $("#product-snapshots").get(0);
+
+            //  Create a manager to manager the element.
+            var manager = new Hammer(element);
+
+            //  Declare global variables to swiped correct distance.
+            var dx = 0, dy = 0;
+
+            //  Subscribe to a desired event.
+            manager.on("swipe", function(e) {
+                debugMode && console.log(e);
+
+                dx += e.deltaX;
+
+                var direction = e.offsetDirection;
+                var translate3d = `translate3d(${dx}px, 0, 0)`;
+
+                if (direction === 4 || direction === 2) {
+                    //  e.target.style.transform = translate3d;
+                    //  Use the element but not the e.target.
+                    element.style.transform = translate3d;
+                }
+
+            });
+
+        }
+
+    })();
+*/
+</script>
 
 </body>
 </html>
