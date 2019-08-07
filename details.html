@@ -468,7 +468,7 @@
 
             $(snapshots).children().remove();
 
-            product.snapshots.forEach(function(id){
+            product.snapshots.forEach(function(id, i){
 
                 var background = `//i.imgur.com/${id}s.jpg`;
                 cache.match(background).then(function(response){
@@ -485,6 +485,7 @@
                     element.id = id;  // optional!
                     element.imageSrc = `//i.imgur.com/${id}.jpg`;
                     element.thumbnail = `//i.imgur.com/${id}s.jpg`;
+                    element.title = `${product.name} snapshot #${i}`;
                     element.classList.add("btn", "btn-default", "btn-white-outline", "snapshot-item", "product-snapshot-item");
                 //  element.style.cssText = `background-size:contain;background-position:50% 50%;background-repeat:no-repeat;background-image:url(${background});`;
 
@@ -528,7 +529,18 @@
 
             });
 
-        });
+        }).then(function(){
+
+			$("li.product-snapshot-item").fancybox({
+				"transitionIn"		: "none",
+				"transitionOut"		: "none",
+				"titlePosition" 	: "over",
+				"titleFormat"		: function(title, currentArray, currentIndex, currentOpts) {
+					return `<span id="fancybox-title-over">Image${currentIndex + 1}/${currentArray.length}${title.length ? " &nbsp; " + title : ""}</span>`;
+				}
+			});
+
+        })
 
         var liveTestButtonClicked = new Signal();
 
