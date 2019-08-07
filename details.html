@@ -322,33 +322,29 @@
         if ( window.Hammer && !window.isMobile ) {
 
         //  Important css settings.
-            element.parentElement.style["overflow-y"] = "hidden";
-        //  element.style.transition = "transform 250ms ease-out";
+            element.style["overflow-y"] = "hidden";
+        //  element.children[0].style.transition = "transform 250ms ease-out";
 
         //  Create a manager to manager the element.
-
             var manager = new Hammer(element);
 
-        //  Declare global variables to swiped correct distance.
+        //  Declare global variables 
+        //  to swiped correct distance.
 
-            var dx = 0, dy = 0;
+        //  var dx = 0, dy = 0;
 
         //  Subscribe to a desired event.
-
             manager.on("swipe", function(e) {
             //  debugMode && console.log(e);
 
             //  dx += e.deltaX;
-
-                var direction = e.offsetDirection;
             //  var translate3d = `translate3d(${dx}px, 0, 0)`;
 
-            //  Use the element but not the e.target.
+                var direction = e.offsetDirection;
 
-                if (direction === 4 ) {
-                    element.parentElement.scrollLeft += e.deltaX;
-                } else if ( direction === 2 ) {
-                    element.parentElement.scrollRight += e.deltaX;
+                if (direction === 4 || direction === 2) {
+                //  Use the element but not the e.target.
+                    element.scrollLeft += e.deltaX;
                 }
 
             });
