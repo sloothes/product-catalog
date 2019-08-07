@@ -19,13 +19,16 @@
     <link rel="stylesheet" href="/css/index.css">
     <!-- link rel="stylesheet" href="/style.css" -->
 
+    <script> debugMode = true; </script>
+
+    <script src="/socketcluster.js"></script>
+    <script src="/sc-codec-min-bin.js"></script>
+
     <script src="/js/loadjs.min.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery-ui.js"></script>
-    <script src="/js/DeviceDetector.js"></script>
-    <script src="/socketcluster.js"></script>
-    <script src="/sc-codec-min-bin.js"></script>
     <script src="/js/hammer.js"></script>
+    <script src="/js/DeviceDetector.js"></script>
 
 </head>
 
@@ -162,6 +165,7 @@
         padding:30px;
     }
 
+    #product-preview,
     #product-snapshots {
         transition:transform 250ms ease-out;
     }
@@ -183,6 +187,7 @@
         </div>
 
         <script>
+
             (function(){
 
                 const productPreview = $("img#product-preview").get(0);
@@ -199,48 +204,51 @@
                 });
 
             })();
+
         </script>
 
         <script>
-        /*
+
         //  hummer.js
+        //  Swipe mouse scrolling on desktop.
         //  Add touch gestures to your webapp.
+
             (function(){
 
                 if (isMobile) return;
 
-            //  Get a reference to an element
-                var gesture = document.querySelector("img#product-preview");
+                if ( window.Hammer && !isMobile ) {
 
-            //  Create a manager to manager the element.
-                var manager = new Hammer.Manager(gesture);
+                //  Get a reference to an element
+                    var element = $("#product-preview").get(0);
 
-            //  Create a recognizer.
-                var Swipe = new Hammer.Swipe();
+                //  Create a manager to manager the element.
+                    var manager = new Hammer(element);
 
-            //  Add the recognizer to the manager.
-                manager.add(Swipe);
+                //  Declare global variables to swiped correct distance.
+                    var dx = 0, dy = 0;
 
-            //  Declare global variables to swiped correct distance.
-                var deltaX = 0, deltaY = 0;
+                //  Subscribe to a desired event.
+                    manager.on("swipe", function(e) {
+                        debugMode && console.log(e);
 
-            //  Subscribe to a desired event.
-                manager.on("swipe", function(e) {
+                        dx += e.deltaX;
 
-                    deltaX += e.deltaX;
+                        var direction = e.offsetDirection;
+                        var translate3d = `translate3d(${dx}px, 0, 0)`;
 
-                    var direction = e.offsetDirection;
-                    var translate3d = `translate3d(${deltaX}px, 0, 0)`;
+                        if (direction === 4 || direction === 2) {
+                        //  e.target.style.transform = translate3d;
+                        //  Use the element but not the e.target.
+                            element.style.transform = translate3d;
+                        }
 
-                    if (direction === 4 || direction === 2) {
-                        //  e.target.innerText = deltaX;
-                        e.target.style.transform = translate3d;
-                    }
+                    });
 
-                });
+                }
 
             })();
-        */
+
         </script>
 
         <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
@@ -271,6 +279,51 @@
             if ( window.Hammer && !isMobile ) 
                 $("#product-snapshots-container").get(0).style["overflow"] = "hidden";
         })();
+    </script>
+
+    <script>
+
+        (function(){
+
+            if ( isMobile ) return;
+
+        //  hummer.js (Touch Emulator)
+        //  Emulate touch on a desktop.
+        //  Swipe mouse scrolling on desktop.
+        //  Add touch gestures to your webapp.
+
+            if ( window.Hammer && !isMobile ) {
+
+            //  Get a reference to an element
+                var element = $("#product-snapshots").get(0);
+
+            //  Create a manager to manager the element.
+                var manager = new Hammer(element);
+
+            //  Declare global variables to swiped correct distance.
+                var dx = 0, dy = 0;
+
+            //  Subscribe to a desired event.
+                manager.on("swipe", function(e) {
+                    debugMode && console.log(e);
+
+                    dx += e.deltaX;
+
+                    var direction = e.offsetDirection;
+                    var translate3d = `translate3d(${dx}px, 0, 0)`;
+
+                    if (direction === 4 || direction === 2) {
+                    //  e.target.style.transform = translate3d;
+                    //  Use the element but not the e.target.
+                        element.style.transform = translate3d;
+                    }
+
+                });
+
+            }
+
+         })();
+
     </script>
 
     <div id="product-purcashe-pane">
@@ -357,44 +410,51 @@
 
 <script>
 
-    debugMode = true;
+    function SwipeMouseScrolling(element){
 
-//  hummer.js (Touch Emulator)
-//  Emulate touch on a desktop.
-//  Add touch gestures to your webapp.
+        if ( window.isMobile ) return;
 
-(function(){
+        //  hummer.js (Touch Emulator)
+        //  Emulate touch on a desktop.
+        //  Swipe mouse scrolling on desktop.
+        //  Add touch gestures to your webapp.
 
-    if ( window.Hammer && !isMobile ) {
+        if ( window.Hammer && !window.isMobile ) {
 
-    //  Get a reference to an element
-        var element = $("#product-snapshots").get(0);
+        //  Important css settings.
+            element.parentElement.style.overflow = "hidden";
+            element.style.transition = "transform 250ms ease-out";
 
-    //  Create a manager to manager the element.
-        manager = new Hammer(element);
+        //  Create a manager to manager the element.
 
-    //  Declare global variables to swiped correct distance.
-        var dx = 0, dy = 0;
+            var manager = new Hammer(element);
 
-    //  Subscribe to a desired event.
-        manager.on("swipe", function(e) {
-            debugMode && console.log(e);
+        //  Declare global variables to swiped correct distance.
 
-            dx += e.deltaX;
+            var dx = 0, dy = 0;
 
-            var direction = e.offsetDirection;
-            var translate3d = `translate3d(${dx}px, 0, 0)`;
+        //  Subscribe to a desired event.
 
-            if (direction === 4 || direction === 2) {
-            //  e.target.style.transform = translate3d;
-                element.style.transform = translate3d;
-            }
+            manager.on("swipe", function(e) {
+            //  debugMode && console.log(e);
 
-        });
+                dx += e.deltaX;
+
+                var direction = e.offsetDirection;
+                var translate3d = `translate3d(${dx}px, 0, 0)`;
+
+                if (direction === 4 || direction === 2) {
+                //  e.target.style.transform = translate3d;
+                //  Use the element but not the e.target.
+                    element.style.transform = translate3d;
+                }
+
+            });
+
+        }
 
     }
 
- })();
 </script>
 
 <script src="/js/rawinflate.js"></script>
@@ -415,9 +475,9 @@
 <script>
 
     const db = new zango.Db( "PRODUCTS", {
+    //  multiplex:  true,
         products:   true,
         snapshots:  true,
-    //  multiplex:  true,
     });
 
 </script>
