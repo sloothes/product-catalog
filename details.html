@@ -24,16 +24,16 @@
     <script src="/socketcluster.js"></script>
     <script src="/sc-codec-min-bin.js"></script>
 
-    <script src="/fancybox/jquery-1.4.3.min.js"></script>
-    <script src="/fancybox/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-    <script src="/fancybox/fancybox/jquery.easing-1.3.pack.js"></script>
-    <script src="/fancybox/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-
     <script src="/js/hammer.js"></script>
     <script src="/js/loadjs.min.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery-ui.js"></script>
     <script src="/js/DeviceDetector.js"></script>
+
+    <script src="/fancybox/jquery-1.4.3.min.js"></script>
+    <script src="/fancybox/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <script src="/fancybox/fancybox/jquery.easing-1.3.pack.js"></script>
+    <script src="/fancybox/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
 
 </head>
 
@@ -529,17 +529,6 @@
 
             });
 
-        }).then(function(){
-
-			$("li.product-snapshot-item").fancybox({
-				"transitionIn"		: "none",
-				"transitionOut"		: "none",
-				"titlePosition" 	: "over",
-				"titleFormat"		: function(title, currentArray, currentIndex, currentOpts) {
-					return `<span id="fancybox-title-over">Image${currentIndex + 1}/${currentArray.length}${title.length ? " &nbsp; " + title : ""}</span>`;
-				}
-			});
-
         })
 
         var liveTestButtonClicked = new Signal();
@@ -616,16 +605,23 @@
 
 </script>
 
+<script>
 
+$(document).ready(function() {
 
+    $("li.product-snapshot-item").fancybox({
+        "transitionIn"		: "none",
+        "transitionOut"		: "none",
+        "titlePosition" 	: "over",
+        "titleFormat"		: function(title, currentArray, currentIndex, currentOpts) {
+            return `<span id="fancybox-title-over">Image${currentIndex + 1}/${currentArray.length}${title.length ? " &nbsp; " + title : ""}</span>`;
+        }
+    });
 
+});
     
-    
-    
-    
-    
-    
-    
+</script>
+
 <script>
 
 /*
