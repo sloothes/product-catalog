@@ -182,7 +182,7 @@
 
     <div id="product-preview-pane">
 
-        <div id="preview-container" style="max-width:100%;text-align:center;">
+        <div id="preview-container" style="max-width:100%;text-align:center;overflow-y:hidden;">
             <img id="product-preview" src="/img/no-image-avaliable-200x200.png">
         </div>
 
@@ -317,32 +317,30 @@
 
     function SwipeMouseScrolling(element){
 
+        if ( !window.Hammer ) return;
         if ( window.isMobile ) return;
 
-        if ( window.Hammer && !window.isMobile ) {
+    //  For horizontal scrolling 
+    //  overflow-y must be "hidden".
 
-        //  For horizontal scrolling 
-        //  overflow-y must be "hidden".
+        element.style["overflow-y"] = "hidden";
 
-            element.style["overflow-y"] = "hidden";
+    //  Create a manager to manager the element.
 
-        //  Create a manager to manager the element.
+        var manager = new Hammer(element);
 
-            var manager = new Hammer(element);
+    //  Subscribe to a desired event.
 
-        //  Subscribe to a desired event.
+        manager.on("swipe", function(e) {
+        //  debugMode && console.log(e);
 
-            manager.on("swipe", function(e) {
-            //  debugMode && console.log(e);
+            if ( e.offsetDirection === 4 || e.offsetDirection === 2 ) {
 
-                if (e.offsetDirection === 4 || e.offsetDirection === 2) {
+                element.scrollLeft += e.deltaX;
 
-                    element.scrollLeft += e.deltaX;
-                }
+            }
 
-            });
-
-        }
+        });
 
     }
 
