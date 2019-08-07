@@ -310,84 +310,6 @@
 
 <script>
 
-    //  hummer.js (Touch Emulator)
-    //  Emulate touch on a desktop.
-    //  Swipe mouse scrolling on desktop.
-    //  Add touch gestures to your webapp.
-
-    function SwipeMouseScrolling(element){
-
-        if ( !window.Hammer ) return;
-        if ( window.isMobile ) return;
-
-    //  For horizontal scrolling 
-    //  overflow-y must be "hidden".
-
-        element.style["overflow-y"] = "hidden";
-
-    //  Create a manager to manager the element.
-
-        var manager = new Hammer(element);
-
-    //  Subscribe to a desired event.
-
-        manager.on("swipe", function(e) {
-        //  debugMode && console.log(e);
-
-            if ( e.offsetDirection === 4 || e.offsetDirection === 2 ) {
-
-                element.scrollLeft += e.deltaX;
-
-            }
-
-        });
-
-    }
-
-    function SwipeMouseTranslate(element){
-
-        if ( window.isMobile ) return;
-
-        //  hummer.js (Touch Emulator)
-        //  Emulate touch on a desktop.
-        //  Swipe mouse scrolling on desktop.
-        //  Add touch gestures to your webapp.
-
-        if ( window.Hammer && !window.isMobile ) {
-
-        //  Important css settings.
-            element.parentElement.style.overflow = "hidden";
-            element.style.transition = "transform 250ms ease-out";
-
-        //  Create a manager to manager the element.
-
-            var manager = new Hammer(element);
-
-        //  Declare global variables to swiped correct distance.
-
-            var dx = 0, dy = 0;
-
-        //  Subscribe to a desired event.
-
-            manager.on("swipe", function(e) {
-            //  debugMode && console.log(e);
-
-                dx += e.deltaX;
-
-                var direction = e.offsetDirection;
-                var translate3d = `translate3d(${dx}px, 0, 0)`;
-
-                if (direction === 4 || direction === 2) {
-                //  Use the element but not the e.target.
-                    element.style.transform = translate3d;
-                }
-
-            });
-
-        }
-
-    }
-
 </script>
 
 <script src="/js/rawinflate.js"></script>
@@ -429,15 +351,49 @@
     const previewContainer = document.getElementById("preview-container");
     const snapshotsContainer = document.getElementById("product-snapshots-container");
 
-        SwipeMouseScrolling(previewContainer);
-        SwipeMouseScrolling(snapshotsContainer);
-
     const purcashBtn = document.getElementById("purcash-button");
     const wishlistBtn = document.getElementById("wishlist-button");
     const livetestBtn = document.getElementById("live-test-button");
     const shoppingCartBtn = document.getElementById("live-test-button");
 
     var Signal = signals.Signal;
+
+    //  hummer.js (Touch Emulator)
+    //  Emulate touch on a desktop.
+    //  Swipe mouse scrolling on desktop.
+    //  Add touch gestures to your webapp.
+
+    SwipeMouseScrolling( previewContainer );
+    SwipeMouseScrolling( snapshotsContainer );
+
+    function SwipeMouseScrolling(element){
+
+        if ( !window.Hammer ) return;
+        if ( window.isMobile ) return;
+
+    //  For horizontal scrolling 
+    //  overflow-y must be "hidden".
+
+        element.style["overflow-y"] = "hidden";
+
+    //  Create a manager to manager the element.
+
+        var manager = new Hammer(element);
+
+    //  Subscribe to a desired event.
+
+        manager.on("swipe", function(e) {
+        //  debugMode && console.log(e);
+
+            if ( e.offsetDirection === 4 || e.offsetDirection === 2 ) {
+
+                element.scrollLeft += e.deltaX;
+
+            }
+
+        });
+
+    }
 
     if ( store("Product") ) (function(){
 
@@ -621,6 +577,59 @@
     
     
 <script>
+
+/*
+    //  hummer.js (Touch Emulator)
+    //  Emulate touch on a desktop.
+    //  Swipe mouse scrolling on desktop.
+    //  Add touch gestures to your webapp.
+
+    function SwipeMouseTranslate(element){
+
+        if ( window.isMobile ) return;
+
+        //  hummer.js (Touch Emulator)
+        //  Emulate touch on a desktop.
+        //  Swipe mouse scrolling on desktop.
+        //  Add touch gestures to your webapp.
+
+        if ( window.Hammer && !window.isMobile ) {
+
+        //  Important css settings.
+            element.parentElement.style.overflow = "hidden";
+            element.style.transition = "transform 250ms ease-out";
+
+        //  Create a manager to manager the element.
+
+            var manager = new Hammer(element);
+
+        //  Declare global variables to swiped correct distance.
+
+            var dx = 0, dy = 0;
+
+        //  Subscribe to a desired event.
+
+            manager.on("swipe", function(e) {
+            //  debugMode && console.log(e);
+
+                dx += e.deltaX;
+
+                var direction = e.offsetDirection;
+                var translate3d = `translate3d(${dx}px, 0, 0)`;
+
+                if (direction === 4 || direction === 2) {
+                //  Use the element but not the e.target.
+                    element.style.transform = translate3d;
+                }
+
+            });
+
+        }
+
+    }
+
+*/
+
 /*
 
     //  hummer.js
