@@ -321,29 +321,22 @@
 
         if ( window.Hammer && !window.isMobile ) {
 
-        //  Important css settings.
+        //  For horizontal scrolling 
+        //  overflow-y must be "hidden".
+
             element.style["overflow-y"] = "hidden";
-        //  element.children[0].style.transition = "transform 250ms ease-out";
 
         //  Create a manager to manager the element.
+
             var manager = new Hammer(element);
 
-        //  Declare global variables 
-        //  to swiped correct distance.
-
-        //  var dx = 0, dy = 0;
-
         //  Subscribe to a desired event.
+
             manager.on("swipe", function(e) {
             //  debugMode && console.log(e);
 
-            //  dx += e.deltaX;
-            //  var translate3d = `translate3d(${dx}px, 0, 0)`;
+                if (e.offsetDirection === 4 || e.offsetDirection === 2) {
 
-                var direction = e.offsetDirection;
-
-                if (direction === 4 || direction === 2) {
-                //  Use the element but not the e.target.
                     element.scrollLeft += e.deltaX;
                 }
 
