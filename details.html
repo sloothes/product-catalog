@@ -203,11 +203,12 @@
                 if ( !window.Hammer ) return;
                 if ( window.isMobile ) return;
 
-                const element = $("#preview-container").get(0);
+                const parent = $("#preview-container").get(0);
+                const element = $("img#product-preview").get(0);
 
             //  Smoother scroll.
 
-                element.style["scroll-behavior"] = "smooth";
+                parent.style["scroll-behavior"] = "smooth";
 
             //  Create a manager to manager the element.
 
@@ -219,7 +220,7 @@
 
                     if ( e.offsetDirection === 4 || e.offsetDirection === 2 ) {
 
-                        element.scrollLeft -= e.deltaX;
+                        parent.scrollLeft -= e.deltaX;
 
                     }
 
