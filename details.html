@@ -369,6 +369,10 @@
 
         element.style["overflow-y"] = "hidden";
 
+    //  Smoother scroll.
+
+        element.style["scroll-behavior"] = "smooth";
+
     //  Create a manager to manager the element.
 
         var manager = new Hammer(element);
@@ -376,18 +380,12 @@
     //  Subscribe to a desired event.
 
         manager.on("swipe", function(e) {
-        //  debugMode && console.log(e);
 
             if ( e.offsetDirection === 4 || e.offsetDirection === 2 ) {
 
-            //  Smoother scroll.
-                element.scroll({
-                    left: this.scrollLeft - e.deltaX,
-                    behavior: "smooth",
-                });
-            }
+                element.scrollLeft -= e.deltaX;
 
-            //  element.scrollLeft -= e.deltaX;
+            }
 
         });
 
