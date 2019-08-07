@@ -436,9 +436,10 @@
     const snapshots = document.getElementById("product-snapshots");
     const description = document.getElementById("description-tab");
     const previewContainer = document.getElementById("preview-container");
+    const snapshotsContainer = document.getElementById("product-snapshots-container");
 
-    SwipeMouseScrolling(preview);
-    SwipeMouseScrolling(snapshots);
+        SwipeMouseScrolling(previewContainer);
+        SwipeMouseScrolling(snapshotsContainer);
 
     const purcashBtn = document.getElementById("purcash-button");
     const wishlistBtn = document.getElementById("wishlist-button");
