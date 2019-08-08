@@ -207,7 +207,6 @@
                 $(this).fadeIn(500);
                 if ( this.src.startsWith("blob:") ) {
                     window.URL.revokeObjectURL(this.src); // important!
-                    debugMode && console.log("revoked", this.src);
                 }
             });
         </script>
