@@ -514,42 +514,43 @@
 
                     var element = document.createElement("li");
                     element.id = id;  // optional!
-                //  element.rel = "snapshots";
-                //  element.href = "#product-preview";
                     element.imageSrc = `//i.imgur.com/${id}.jpg`;
                     element.thumbnail = `//i.imgur.com/${id}s.jpg`;
                     element.title = `${product.name} (snapshot ${i})`;
                     element.classList.add("btn", "btn-default", "btn-white-outline", "snapshot-item", "product-snapshot-item");
                 //  element.style.cssText = `background-size:contain;background-position:50% 50%;background-repeat:no-repeat;background-image:url(${background});`;
 
-                    if (blob) element.style.cssText = `background-image:url(${URL.createObjectURL(blob)})`;
-                    else element.style.cssText = `background-image:url(${background})`;
+                    if (!blob) element.style.cssText = `background-image:url(${background})`;
+                    else element.style.cssText = `background-image:url(${URL.createObjectURL(blob)})`;
 
                     $(element).on("click", function(){
-                        caches.open("products").then(function(cache){
-                            cache.match(element.imageSrc).then(function(response){
-                                if (response) return response.blob();
-                                else return cache.add(element.imageSrc).then(function(){
-                                    return cach.match(element.imageSrc).then(function(response){
-                                        return response.blob();
+                        clearTimeout(this.interval);
+                        this.interval = setTimeout(function(){
+                            caches.open("products").then(function(cache){
+                                cache.match(element.imageSrc).then(function(response){
+                                    if (response) return response.blob();
+                                    else return cache.add(element.imageSrc).then(function(){
+                                        return cach.match(element.imageSrc).then(function(response){
+                                            return response.blob();
+                                        });
                                     });
+                                }).then(function(blob){
+                                    $(preview).fadeOut(250);
+
+                                    if (!blob) {
+                                        preview.src = element.imageSrc;
+
+                                    } else {
+
+                                        setTimeout(function(){
+                                            preview.src = URL.createObjectURL(blob);
+                                        }, 200);
+
+                                    }
+
                                 });
-                            }).then(function(blob){
-                                $(preview).fadeOut(250);
-
-                                if (!blob) {
-                                    preview.src = element.imageSrc;
-
-                                } else {
-
-                                    setTimeout(function(){
-                                        preview.src = URL.createObjectURL(blob);
-                                    }, 200);
-
-                                }
-
                             });
-                        });
+                        }, 250);
                     });
 
                     return element;
