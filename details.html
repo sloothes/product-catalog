@@ -38,14 +38,24 @@
 
         $(function() {
 
-            $("#live-test-button").fancybox({
-                "width"				: "50%",
-                "height"			: "85%",
+            if (isMobile) $("#live-test-button").fancybox({
+                "width"				: "90%",
+                "height"			: "90%",
                 "autoScale"			: false,
                 "transitionIn"		: "none",
                 "transitionOut"		: "none",
                 "type"				: "iframe",
             });
+
+            if (!isMobile) $("#live-test-button").fancybox({
+                "width"				: "450px",
+                "height"			: "700px",
+                "autoScale"			: false,
+                "transitionIn"		: "none",
+                "transitionOut"		: "none",
+                "type"				: "iframe",
+            });
+
 
             $("img#product-preview").on("load", function(){
                 $(this).fadeIn(500);
