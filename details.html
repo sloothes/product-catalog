@@ -38,31 +38,23 @@
 
         $(function() {
 
-            if (isMobile) $("#live-test-button").fancybox({
-                "width"				: "100%",
-                "height"			: "100%",
-                "autoScale"			:  true,
-                "transitionIn"		: "none",
-                "transitionOut"		: "none",
-                "type"				: "iframe",
-            });
+            if ( isMobile ) {
 
-            if (!isMobile) $("#live-test-button").fancybox({
-                "width"				: "50%",
-                "height"			: "90%",
-                "autoScale"			: false,
-                "transitionIn"		: "none",
-                "transitionOut"		: "none",
-                "type"				: "iframe",
-            });
+                $("#live-test-button").fancybox({
+                    "type": "iframe"
+                });
 
+            } else {
 
-            $("img#product-preview").on("load", function(){
-                $(this).fadeIn(500);
-                if ( this.src.startsWith("blob:") ) {
-                    window.URL.revokeObjectURL(this.src); // important!
-                }
-            });
+                $("#live-test-button").fancybox({
+                    "width"				: "50%",
+                    "height"			: "90%",
+                    "autoScale"			:  true,
+                    "transitionIn"		: "none",
+                    "transitionOut"		: "none",
+                    "type"				: "iframe"
+                });
+            }
 
         });
 
@@ -237,33 +229,26 @@
         <script>
 
             (function (){
+                $("img#product-preview").on("load", function(){
+                    $(this).fadeIn(500);
+                    if ( this.src.startsWith("blob:") ) {
+                        window.URL.revokeObjectURL(this.src); // important!
+                    }
+                });
+            })();
 
+            (function (){
                 if ( !window.Hammer ) return;
                 if ( window.isMobile ) return;
-
                 const parent = $("#preview-container").get(0);
                 const element = $("img#product-preview").get(0);
-
-            //  Smoother scroll.
-
                 parent.style["scroll-behavior"] = "smooth";
-
-            //  Create a manager to manager the element.
-
                 var manager = new Hammer(element);
-
-            //  Subscribe to a desired event.
-
                 manager.on("swipe", function(e) {
-
                     if ( e.offsetDirection === 4 || e.offsetDirection === 2 ) {
-
                         parent.scrollLeft -= e.deltaX;
-
                     }
-
                 });
-
             })();
 
         </script>
