@@ -526,7 +526,6 @@
                     else element.style.cssText = `background-image:url(${background})`;
 
                     $(element).on("click", function(e){
-                        e.preventDefault();
                         caches.open("products").then(function(cache){
                             cache.match(element.imageSrc).then(function(response){
                                 if (response) return response.blob();
