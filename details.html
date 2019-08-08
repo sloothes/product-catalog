@@ -476,18 +476,20 @@
 
                 }).then(function(blob){
 
-                    var element = document.createElement("li");
+                    var element = document.createElement("a");
                     element.id = id;  // optional!
+                    element.href = `//i.imgur.com/${id}.jpg`;
                     element.imageSrc = `//i.imgur.com/${id}.jpg`;
                     element.thumbnail = `//i.imgur.com/${id}s.jpg`;
-                    element.title = `${product.name} snapshot #${i}`;
+                    element.title = `${product.name} (snapshot ${i})`;
                     element.classList.add("btn", "btn-default", "btn-white-outline", "snapshot-item", "product-snapshot-item");
                 //  element.style.cssText = `background-size:contain;background-position:50% 50%;background-repeat:no-repeat;background-image:url(${background});`;
 
                     if (blob) element.style.cssText = `background-image:url(${URL.createObjectURL(blob)})`;
                     else element.style.cssText = `background-image:url(${background})`;
 
-                    $(element).on("click", function(){
+                    $(element).on("click", function(e){
+                        e.preventDefault();
                         caches.open("products").then(function(cache){
                             cache.match(element.imageSrc).then(function(response){
                                 if (response) return response.blob();
@@ -504,6 +506,7 @@
                                 }, 200);
                             });
                         });
+                        return false;
                     });
 
                     return element;
@@ -601,29 +604,32 @@
 </script>
 
 <script>
+(function(){
 
-loadjs([
+    loadjs([
 
-    "/fancybox/jquery-1.4.3.min.js",
-    "/fancybox/fancybox/jquery.fancybox-1.3.4.pack.js",
-    "/fancybox/fancybox/jquery.easing-1.3.pack.js",
-    "/fancybox/fancybox/jquery.mousewheel-3.0.4.pack.js",
+        "/fancybox/jquery-1.4.3.min.js",
+        "/fancybox/fancybox/jquery.fancybox-1.3.4.pack.js",
+        "/fancybox/fancybox/jquery.easing-1.3.pack.js",
+        "/fancybox/fancybox/jquery.mousewheel-3.0.4.pack.js",
 
-], function(){
+    ], function(){
 
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-        $("li.product-snapshot-item").fancybox({
-            "transitionIn"		: "none",
-            "transitionOut"		: "none",
-            "titlePosition" 	: "over",
-            "titleFormat"		: function(title, currentArray, currentIndex, currentOpts) {
-                return `<span id="fancybox-title-over">Image${currentIndex + 1}/${currentArray.length}${title.length ? " &nbsp; " + title : ""}</span>`;
-            }
+            $("li.product-snapshot-item").fancybox({
+                "transitionIn"		: "none",
+                "transitionOut"		: "none",
+                "titlePosition" 	: "over",
+                "titleFormat"		: function(title, currentArray, currentIndex, currentOpts) {
+                    return `<span id="fancybox-title-over">Image${currentIndex + 1}/${currentArray.length}${title.length ? " &nbsp; " + title : ""}</span>`;
+                }
+            });
+
         });
-
     });
-});
+
+})();
 
 </script>
 
