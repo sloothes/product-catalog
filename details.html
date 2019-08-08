@@ -200,7 +200,6 @@
 
         <div id="preview-container" style="max-width:100%;text-align:center;">
             <img id="product-preview" src="/img/no-image-avaliable-200x200.png">
-            <img id="fancybox-preview" src="/img/no-image-avaliable-200x200.png">
         </div>
 
         <script>
@@ -354,23 +353,6 @@
 
 </section>
 
-<script>
-/*
-    $(document).ready(function() {
-
-        $("a[rel=snapshots]").fancybox({
-            "transitionIn"		: "none",
-            "transitionOut"		: "none",
-            "titlePosition" 	: "over",
-            "titleFormat"		: function(title, currentArray, currentIndex, currentOpts) {
-                return `<span id="fancybox-title-over" style="width:100%;overflow:hidden;">Image${currentIndex + 1}/${currentArray.length}${title.length ? " &nbsp; " + title : ""}</span>`;
-            }
-        });
-
-    });
-*/
-</script>
-
 <script src="/js/rawinflate.js"></script>
 <script src="/js/rawdeflate.js"></script>
 <script src="/js/store2.js"></script>
@@ -509,10 +491,10 @@
 
                 }).then(function(blob){
 
-                    var element = document.createElement("a");
+                    var element = document.createElement("li");
                     element.id = id;  // optional!
-                    element.rel = "snapshots";
-                    element.href = "#product-preview";
+                //  element.rel = "snapshots";
+                //  element.href = "#product-preview";
                     element.imageSrc = `//i.imgur.com/${id}.jpg`;
                     element.thumbnail = `//i.imgur.com/${id}s.jpg`;
                     element.title = `${product.name} (snapshot ${i})`;
@@ -522,8 +504,7 @@
                     if (blob) element.style.cssText = `background-image:url(${URL.createObjectURL(blob)})`;
                     else element.style.cssText = `background-image:url(${background})`;
 
-                    $(element).on("click", function(e){
-                    //  e.preventDefault();
+                    $(element).on("click", function(){
                         caches.open("products").then(function(cache){
                             cache.match(element.imageSrc).then(function(response){
                                 if (response) return response.blob();
@@ -534,13 +515,20 @@
                                 });
                             }).then(function(blob){
                                 $(preview).fadeOut(250);
-                                setTimeout(function(){
-                                    if (!blob) preview.src = fancyimg.src = element.imageSrc;
-                                    else preview.src = fancyimg.src = URL.createObjectURL(blob);
-                                }, 200);
+
+                                if (!blob) {
+                                    preview.src = element.imageSrc;
+
+                                } else {
+
+                                    setTimeout(function(){
+                                        preview.src = URL.createObjectURL(blob);
+                                    }, 200);
+
+                                }
+
                             });
                         });
-                    //  return false;
                     });
 
                     return element;
