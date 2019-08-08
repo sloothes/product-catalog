@@ -355,7 +355,7 @@
 </section>
 
 <script>
-
+/*
     $(document).ready(function() {
 
         $("a[rel=snapshots]").fancybox({
@@ -368,7 +368,7 @@
         });
 
     });
-
+*/
 </script>
 
 <script src="/js/rawinflate.js"></script>
@@ -512,7 +512,7 @@
                     var element = document.createElement("a");
                     element.id = id;  // optional!
                     element.rel = "snapshots";
-                    element.href = "#fancybox-preview";
+                    element.href = "#product-preview";
                     element.imageSrc = `//i.imgur.com/${id}.jpg`;
                     element.thumbnail = `//i.imgur.com/${id}s.jpg`;
                     element.title = `${product.name} (snapshot ${i})`;
@@ -523,6 +523,7 @@
                     else element.style.cssText = `background-image:url(${background})`;
 
                     $(element).on("click", function(e){
+                    //  e.preventDefault();
                         caches.open("products").then(function(cache){
                             cache.match(element.imageSrc).then(function(response){
                                 if (response) return response.blob();
@@ -539,7 +540,7 @@
                                 }, 200);
                             });
                         });
-                        return false;
+                    //  return false;
                     });
 
                     return element;
