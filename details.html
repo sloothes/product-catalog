@@ -34,6 +34,30 @@
     <script src="/fancybox/fancybox/jquery.easing-1.3.pack.js"></script>
 <!-- script src="/fancybox/fancybox/jquery.mousewheel-3.0.4.pack.js"></script -->
 
+    <script>
+
+        $(document).ready(function() {
+
+            $("#live-test-button").fancybox({
+                "width"				: "75%",
+                "height"			: "75%",
+                "autoScale"			: false,
+                "transitionIn"		: "none",
+                "transitionOut"		: "none",
+                "type"				: "iframe",
+            });
+
+            $("img#product-preview").on("load", function(){
+                $(this).fadeIn(500);
+                if ( this.src.startsWith("blob:") ) {
+                    window.URL.revokeObjectURL(this.src); // important!
+                }
+            });
+
+        });
+
+    </script>
+
 </head>
 
 <body>
@@ -174,16 +198,12 @@
         transition:transform 250ms ease-out;
     }
 
-    #fancybox-title {
-        width:100% !important;
-    }
-
-    #fancybox-preview {
-        width:auto;
-        height:auto;
-        max-width:800px;
-        max-height:600px;
-        display:none;
+    #live-test-button {
+        min-width:50%;
+        font-size:2rem;
+        font-weight:bold;
+        border-radius:20px;
+        background-color:#f4b400;
     }
 
 </style>
@@ -201,15 +221,6 @@
         <div id="preview-container" style="max-width:100%;text-align:center;">
             <img id="product-preview" src="/img/no-image-avaliable-200x200.png">
         </div>
-
-        <script>
-            $("img#product-preview").on("load", function(){
-                $(this).fadeIn(500);
-                if ( this.src.startsWith("blob:") ) {
-                    window.URL.revokeObjectURL(this.src); // important!
-                }
-            });
-        </script>
 
         <script>
 
@@ -288,7 +299,7 @@
             </div>
             <hr/>
             <div style="text-align:center;">
-                <div id="live-test-button" class="btn btn-default btn-white-outline" style="min-width:50%;background-color:#f4b400;font-weight:bold;font-size:2rem;border-radius:20px;">Try it!</div>
+                <a id="live-test-button" href="//sloothes.com/scene" class="btn btn-default btn-white-outline">Try it!</a>
             </div>
             <hr/>
             <div style="text-align:center;">
@@ -314,7 +325,6 @@
                 <li class role="presentation"><a href="#product-tab" data-toggle="pill" class="pills right-pill right-pill-product">Product</a></li>
                 <li class role="presentation"><a href="#reviews-tab" data-toggle="pill" class="pills right-pill right-pill-info">Reviews</a></li>
                 <li class role="presentation"><a href="#informs-tab" data-toggle="pill" class="pills right-pill right-pill-info">Info</a></li>
-
                 <!-- li class role="presentation"><a href="#edit-tab" data-toggle="pill" class="pills right-pill right-pill-edit">Edit</a></li -->
 
             </ul>
@@ -549,7 +559,7 @@
             });
 
         });
-
+/*
         var liveTestButtonClicked = new Signal();
 
         $(livetestBtn).on("click", function(){
@@ -587,7 +597,7 @@
 
             });
         });
-
+*/
         $(purcashBtn).on("click", purcasheButtonClickHandler);
 
         function purcasheButtonClickHandler (){
