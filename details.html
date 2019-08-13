@@ -470,7 +470,7 @@
             cache.match(url).then(function(response){
                 if (response) return response.blob();
                 else return cache.add(url).then(function(){
-                    return cach.match(url).then(function(response){
+                    return cache.match(url).then(function(response){
                         return response.blob();
                     });
                 });
@@ -490,7 +490,7 @@
                 cache.match(background).then(function(response){
                     if (response) return response.blob();
                     else return cache.add(background).then(function(){
-                        return cach.match(background).then(function(response){
+                        return cache.match(background).then(function(response){
                             return response.blob();
                         });
                     });
@@ -515,7 +515,7 @@
                                 cache.match(element.imageSrc).then(function(response){
                                     if (response) return response.blob();
                                     else return cache.add(element.imageSrc).then(function(){
-                                        return cach.match(element.imageSrc).then(function(response){
+                                        return cache.match(element.imageSrc).then(function(response){
                                             return response.blob();
                                         });
                                     });
