@@ -41,18 +41,19 @@
             if ( isMobile ) {
 
                 $("#live-test-button").fancybox({
-                    "type": "iframe"
+                    "type": "iframe",
+                    "height": "100%",
                 });
 
             } else {
 
                 $("#live-test-button").fancybox({
-                    "width"				: "50%",
-                    "height"			: "90%",
-                    "autoScale"			:  true,
-                    "transitionIn"		: "none",
-                    "transitionOut"		: "none",
-                    "type"				: "iframe"
+                    "type": "iframe",
+                    "width"  : "50%",
+                    "height" : "90%",
+                    "autoScale":  true,
+                    "transitionIn" : "none",
+                    "transitionOut": "none",
                 });
             }
 
