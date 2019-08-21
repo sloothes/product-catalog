@@ -556,45 +556,7 @@
             });
 
         });
-/*
-        var liveTestButtonClicked = new Signal();
 
-        $(livetestBtn).on("click", function(){
-            liveTestButtonClicked.dispatch();
-        });
-                                                    
-        liveTestButtonClicked.add(function(){
-
-            $(livetestBtn).off(); // important!
-
-            var time = 5 * 60 * 1000; // 5 minutes.
-            var msg = `You have ${time/60000} minutes to test this<br>`
-                + `product live in your home page.`;
-
-            return bootbox.dialog({
-                buttons: true,
-                closeButton: true,
-                className: "middle",
-                message: `<div class="text-center">${msg}</div>`,
-                buttons: { 
-                    test: {
-                        label: "Try it live",
-                        className: "btn-default",
-                        callback: function(){ 
-                        //  bootbox.hideAll(); 
-                            livetestBtn.interval = setTimeout(function(){
-                                $(livetestBtn).on("click", function(){
-                                    liveTestButtonClicked.dispatch();
-                                });
-                            }, time); // 5 minutes.
-                        //  window.location.pathname = "/home";
-                        }
-                    },
-                }
-
-            });
-        });
-*/
         $(purcashBtn).on("click", purcasheButtonClickHandler);
 
         function purcasheButtonClickHandler (){
@@ -776,6 +738,47 @@
 
     })();
 */
+
+/*
+        var liveTestButtonClicked = new Signal();
+
+        $(livetestBtn).on("click", function(){
+            liveTestButtonClicked.dispatch();
+        });
+                                                    
+        liveTestButtonClicked.add(function(){
+
+            $(livetestBtn).off(); // important!
+
+            var time = 5 * 60 * 1000; // 5 minutes.
+            var msg = `You have ${time/60000} minutes to test this<br>`
+                + `product live in your home page.`;
+
+            return bootbox.dialog({
+                buttons: true,
+                closeButton: true,
+                className: "middle",
+                message: `<div class="text-center">${msg}</div>`,
+                buttons: { 
+                    test: {
+                        label: "Try it live",
+                        className: "btn-default",
+                        callback: function(){ 
+                        //  bootbox.hideAll(); 
+                            livetestBtn.interval = setTimeout(function(){
+                                $(livetestBtn).on("click", function(){
+                                    liveTestButtonClicked.dispatch();
+                                });
+                            }, time); // 5 minutes.
+                        //  window.location.pathname = "/home";
+                        }
+                    },
+                }
+
+            });
+        });
+*/
+
 </script>
 
 </body>
