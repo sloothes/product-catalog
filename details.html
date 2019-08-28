@@ -445,6 +445,7 @@
 
 (function(){
 
+    const currency = "$"; // important!
     const uuid = document.getElementById("product-uuid");
     const title = document.getElementById("product-title");
     const price = document.getElementById("product-value");
@@ -519,9 +520,9 @@
         $(".product-description").text(product.description);
 
         if ( product.price == null ) {
-            price.value = price.title = "00.00";
+            price.value = price.title = "$00.00";
         } else { 
-            price.value = price.title = product.price.toFixed(2);
+            price.value = price.title = currency + product.price.toFixed(2);
         }
 
         caches.open("products").then(function(cache){
