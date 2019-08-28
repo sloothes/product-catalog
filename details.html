@@ -510,6 +510,8 @@
         const product_UUID = product.uuid;
         debugMode && console.log(product);
 
+        var selectedIndex = 0;  // important!
+
         title.value = product.name;
         uuid.innerText = product.uuid;
         design.innerText = product.designer;
@@ -541,7 +543,7 @@
 
             $(snapshots).children().remove();
 
-            product.snapshots.forEach(function(id, i){
+            product.snapshots.forEach(function(id, index){
 
                 var background = `//i.imgur.com/${id}s.jpg`;
                 cache.match(background).then(function(response){
@@ -556,9 +558,10 @@
 
                     var element = document.createElement("li");
                     element.id = id;  // optional!
+                    element.index = index;  // important!
                     element.imageSrc = `//i.imgur.com/${id}.jpg`;
                     element.thumbnail = `//i.imgur.com/${id}s.jpg`;
-                    element.title = `${product.name} (snapshot ${i})`;
+                    element.title = `${product.name} (snapshot ${index})`;
                     element.classList.add("btn", "btn-default", "btn-white-outline", "snapshot-item", "product-snapshot-item");
                 //  element.style.cssText = `background-size:contain;background-position:50% 50%;background-repeat:no-repeat;background-image:url(${background});`;
 
@@ -592,6 +595,9 @@
 
                                 });
                             });
+
+                            selectedIndex = element.index; // important!
+
                         }, 250);
                     });
 
