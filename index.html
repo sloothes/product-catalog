@@ -291,7 +291,8 @@
     var selectors;
     var delay = 200;
 
-    const limit = 12;
+    var limit = 12;
+    var currency = "$"; // important!
 
     var max = 0;
     var skip = 0;
@@ -394,7 +395,7 @@
                     if ( doc.price == null ) {
                         price.innerText = price.title = "no value";
                     } else { 
-                        price.innerText = price.title = doc.price.toFixed(2);
+                        price.innerText = price.title = currency + doc.price.toFixed(2);
                     }
 
                     var title = document.createElement("input");
