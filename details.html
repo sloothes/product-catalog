@@ -270,7 +270,8 @@
             </div>
             <hr/>
             <div style="text-align:center;">
-                <a id="live-test-button" href="//sloothes.com/scene" class="btn btn-default btn-white-outline">Try it!</a>
+                <div id="live-test-button" class="btn btn-info btn-white-outline">Try it</div>
+                <!-- a id="live-test-button" href="/outfits/scene.html" class="btn btn-default btn-white-outline">Try it!</a -->
             </div>
             <hr/>
             <div style="text-align:center;">
@@ -282,6 +283,47 @@
                 </div>
             </div>
             <hr/>
+        </div>
+    </div>
+
+    <!-- PHOTOSWIPE -->
+
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <!--  Controls are self-explanatory. Order can be changed. -->
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <button class="pswp__button pswp__button--share" title="Share"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                    <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                    <!-- element will get class pswp__preloader--active when preloader is running -->
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div> 
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -566,6 +608,9 @@
 
         });
 
+    })();
+
+/*
     //  $(purcashBtn).on("click", purcasheButtonClickHandler);
         function purcasheButtonClickHandler (){
 
@@ -594,13 +639,89 @@
                 }
             });
         }
-
-    })();
+*/
 
 })();
 
 </script>
 
+<script>
+
+//  PhotoSwipe.js
+
+(function(){
+
+//  Initializes and opens PhotoSwipe (demo).
+
+    const outfitPrevewSelector = "#outfit-preview";
+    const livetestbuttonSelector = "#live-test-button";
+
+    $("#product-preview").on("click", function(){
+
+        var pswp = $(".pswp").get(0);
+        var psui = PhotoSwipeUI_Default;
+
+        var items = []; // build items array.
+
+        docs.forEach(function(data){
+            items.push({
+                w: 750, h: 750,
+                src: `//i.imgur.com/${data.preview[0]}.jpg`,
+            });
+        });
+
+        var options = {
+            index: selectedIndex, // start at selected index slide.
+            //  read for options: https://photoswipe.com/documentation/options.html
+        };
+
+        var gallery = new PhotoSwipe( pswp, psui, items, options );
+
+        gallery.init();
+
+    //  currentIndex = gallery.itemHolders[1].index;
+        debugMode && console.log({"gallery": gallery});
+
+    });
+
+
+    $("#live-test-button").on("click", function(){
+
+        var pswp = $(".pswp").get(0);
+        var psui = PhotoSwipeUI_Default;
+
+        var items = [{
+        //  HTML support: https://photoswipe.com/documentation/custom-html-in-slides.html
+            html: `<div class="middle">`
+            + `<iframe id="viewer" class="thumbnail" src="/outfits/scene.html">`
+            + `</iframe></div>`
+        }];
+
+    //  read more for options: https://photoswipe.com/documentation/options.html
+        var options = {};
+
+    //  minimal options.
+        options.index = 0; // start at first slide.
+        options.mainClass = "pswp--minimal--dark";
+        options.barsSize = {top:0, bottom:0};
+        options.captionEl = false;
+        options.fullscreenEl = false;
+        options.shareEl = false;
+        options.bgOpacity = 0.85;
+        options.tapToClose = true;
+        options.tapToToggleControls = false;
+
+        var preview = new PhotoSwipe( pswp, psui, items, options );
+
+        preview.init();
+
+        debugMode && console.log({"preview": preview});
+
+    });
+
+})();
+
+</script>
 
 <script>
 
