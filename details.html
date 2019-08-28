@@ -505,7 +505,7 @@
 
     if ( store("Product") ) (function(){
 
-        const product = store("Product");
+        const product = store.remove("Product");
     //  const product = store.remove("Product");
         const product_UUID = product.uuid;
         debugMode && console.log(product);
