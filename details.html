@@ -520,7 +520,7 @@
         $(".product-description").text(product.description);
 
         if ( product.price == null ) {
-            price.value = price.title = "$00.00";
+            price.value = price.title = "$0.00";
         } else { 
             price.value = price.title = currency + product.price.toFixed(2);
         }
