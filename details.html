@@ -1,5 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
@@ -8,7 +9,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <meta name="description" contents="">
 
-    <title>Product Details with snipcart (v1.5)</title>
+    <title>Product Details (snipcart v1.5)</title>
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootbox-dialoges.css">
@@ -17,6 +18,8 @@
     <link rel="stylesheet" href="/css/alerts.css">
     <link rel="stylesheet" href="/css/anywhere3d.css">
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/photoswipe/dist/photoswipe.css">
+    <link rel="stylesheet" href="/photoswipe/dist/default-skin/default-skin.css">
 
     <script> debugMode = true; </script>
     <script src="/socketcluster.js"></script>
@@ -26,6 +29,8 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery-ui.js"></script>
     <script src="/js/DeviceDetector.js"></script>
+    <script src="/photoswipe/dist/photoswipe.js"></script>
+    <script src="/photoswipe/dist/photoswipe-ui-default.js"></script>
 
     <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" 
         data-api-key="MGY1ZGNjMWItZTk5NS00ZTFjLWExMGMtOWVlNjQxM2I2ZmYwNjM3MDI1NTA1ODY4NDc4NTkw">
@@ -234,16 +239,6 @@
                     <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
                     <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
                     <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-                    <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
                 -->
                 </div>
             </div>
@@ -329,7 +324,42 @@
         </div>
 
         <div class="tab-content">
-            <div id="additional-options-tab" class="component-pane tab-pane fade in active"></div>
+            <div id="additional-options-tab" class="component-pane tab-pane fade in active">
+
+            <!-- DISQUS -->
+
+            <div id="disqus_thread" style="padding:20px;"></div>
+
+            <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: 
+            *  EDIT AND UNCOMMENT THE SECTION BELOW 
+            *  TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+            *  https://disqus.com/admin/universalcode/#configuration-variables
+            */
+                var disqus_config = function () {
+                //  Replace PAGE_URL with your page's canonical URL variable.
+                    this.page.url = "https://sloothes.com/product-catalog/details.html";  
+                //  Replace PAGE_IDENTIFIER with your page's unique identifier variable.
+                    this.page.identifier = "/product-catalog/details.html"; 
+                };
+
+                (function() { 
+                //  DON'T EDIT BELOW THIS LINE.
+                    var d = document, s = d.createElement("script");
+                    s.src = "https://sloothes-outfits.disqus.com/embed.js";
+                    s.setAttribute("data-timestamp", + new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+            <script id="dsq-count-scr" src="//sloothes-outfits.disqus.com/count.js" async></script>
+
+
+            </div>
         </div>
 
     </div>
