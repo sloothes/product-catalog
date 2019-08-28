@@ -608,38 +608,35 @@
 
         });
 
-    })();
+        $("#product-preview").on("click", function(){
 
-/*
-    //  $(purcashBtn).on("click", purcasheButtonClickHandler);
-        function purcasheButtonClickHandler (){
+            var pswp = $(".pswp").get(0);
+            var psui = PhotoSwipeUI_Default;
 
-            $(purcashBtn).off(); // important!
+            var items = []; // build items array.
 
-            var msg = `Purcashe of product ID<br>`
-                    + `<b>${product_UUID}</b><br>`
-                    + `completed successfully! Thank you!`;
-
-            return bootbox.dialog({
-                size: "small",
-                className: "middle",
-                closeButton: false,
-                title: `<div class="alert-icon icon-success">`
-                + `</div><h2 style="margin:auto;">Success</h2>`,
-                message: `<div>${msg}</div>`,
-                buttons: { 
-                    success: {
-                        label: "Return to catalog",
-                        className: "btn-default",
-                        callback: function(){ 
-                        //  bootbox.hideAll(); 
-                            window.location.pathname = "/products-catalog";
-                        }
-                    },
-                }
+            product.snapshots.forEach(function(id){
+                items.push({
+                    w: 750, h: 750,
+                    src: `//i.imgur.com/${id}.jpg`,
+                });
             });
-        }
-*/
+
+            var options = {
+                index: selectedIndex, // start at selected index slide.
+            //  read for options: https://photoswipe.com/documentation/options.html
+            };
+
+            var gallery = new PhotoSwipe( pswp, psui, items, options );
+
+            gallery.init();
+
+        //  currentIndex = gallery.itemHolders[1].index;
+            debugMode && console.log({"gallery": gallery});
+
+        });
+
+    })();
 
 })();
 
@@ -655,35 +652,6 @@
 
     const outfitPrevewSelector = "#outfit-preview";
     const livetestbuttonSelector = "#live-test-button";
-
-    $("#product-preview").on("click", function(){
-
-        var pswp = $(".pswp").get(0);
-        var psui = PhotoSwipeUI_Default;
-
-        var items = []; // build items array.
-
-        docs.forEach(function(data){
-            items.push({
-                w: 750, h: 750,
-                src: `//i.imgur.com/${data.preview[0]}.jpg`,
-            });
-        });
-
-        var options = {
-            index: selectedIndex, // start at selected index slide.
-            //  read for options: https://photoswipe.com/documentation/options.html
-        };
-
-        var gallery = new PhotoSwipe( pswp, psui, items, options );
-
-        gallery.init();
-
-    //  currentIndex = gallery.itemHolders[1].index;
-        debugMode && console.log({"gallery": gallery});
-
-    });
-
 
     $("#live-test-button").on("click", function(){
 
@@ -724,6 +692,36 @@
 </script>
 
 <script>
+/*
+    //  $(purcashBtn).on("click", purcasheButtonClickHandler);
+        function purcasheButtonClickHandler (){
+
+            $(purcashBtn).off(); // important!
+
+            var msg = `Purcashe of product ID<br>`
+                    + `<b>${product_UUID}</b><br>`
+                    + `completed successfully! Thank you!`;
+
+            return bootbox.dialog({
+                size: "small",
+                className: "middle",
+                closeButton: false,
+                title: `<div class="alert-icon icon-success">`
+                + `</div><h2 style="margin:auto;">Success</h2>`,
+                message: `<div>${msg}</div>`,
+                buttons: { 
+                    success: {
+                        label: "Return to catalog",
+                        className: "btn-default",
+                        callback: function(){ 
+                        //  bootbox.hideAll(); 
+                            window.location.pathname = "/products-catalog";
+                        }
+                    },
+                }
+            });
+        }
+*/
 
 /*
     //  hummer.js (Touch Emulator)
