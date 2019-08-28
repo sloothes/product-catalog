@@ -179,6 +179,13 @@
         transition:transform 250ms ease-out;
     }
 
+    #previewer {
+        width:750px;
+        height:750px;
+        max-width:90%;
+        max-height:90%;
+    }
+
     #live-test-button {
         min-width:50%;
         font-size:2rem;
@@ -661,7 +668,7 @@
         var items = [{
         //  HTML support: https://photoswipe.com/documentation/custom-html-in-slides.html
             html: `<div class="middle">`
-            + `<iframe id="viewer" class="thumbnail" src="/outfits/scene.html">`
+            + `<iframe id="previewer" class="thumbnail" src="/outfits/scene.html">`
             + `</iframe></div>`
         }];
 
