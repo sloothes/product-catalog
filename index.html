@@ -18,11 +18,15 @@
     <link rel="stylesheet" href="/css/anywhere3d.css">
     <link rel="stylesheet" href="/css/index.css">
     <!-- link rel="stylesheet" href="/style.css" -->
+    <link rel="stylesheet" href="/photoswipe/dist/photoswipe.css">
+    <link rel="stylesheet" href="/photoswipe/dist/default-skin/default-skin.css">
 
     <script>debugMode = true;</script>
     <script src="/js/loadjs.min.js"></script>
     <script src="/socketcluster.js"></script>
     <script src="/sc-codec-min-bin.js"></script>
+    <script src="/photoswipe/dist/photoswipe.js"></script>
+    <script src="/photoswipe/dist/photoswipe-ui-default.js"></script>
 
 </head>
 
@@ -45,7 +49,6 @@
         height:48%; 
         width:22.8rem;
     }
-
 
     .card-field-price {
         font-size:3rem;
@@ -87,6 +90,77 @@
             width:100%;
         }
 
+    }
+
+</style>
+
+<style>
+
+    /*  photoswipe  */
+
+    .viewer {
+        width:750px;
+        height:750px;
+        max-width:90%;
+        max-height:90%;
+    }
+
+    .snapshot-item {
+        width:85px;
+        height:85px;
+        margin:4px;
+        border:thin solid #ccc;
+        background-size: contain;
+        background-position:50% 50%;
+        background-repeat:no-repeat;
+    }
+
+    .tab-pane {
+        width:100%;
+        min-height:250px;;
+    }
+
+    #product-preview-pane {
+        width:49%;
+        height:600px;
+        min-width:49%;
+        max-width:100%;
+        text-align:center;
+        display:inline-block;
+    /*  border:thin solid #ccc; */
+    }
+
+    #preview-container {
+        max-width:100%;
+        text-align:center;
+        overflow:auto;
+    }
+
+    img#product-preview {
+        width:auto;
+        margin:auto;
+        min-height:350px;
+        max-height:450px;
+    }
+
+    #product-purcashe-pane {
+        width:49%;
+        height:600px;
+        float:right;
+        min-width:49%;
+        max-width:100%;
+        display:inline-block;
+        overflow:auto;
+    /*  border:thin solid #ccc; */
+    }
+
+    #product-purcashe {
+        width:100%;
+        margin:auto;
+        height:600px;
+        min-height:400px;
+        max-height:600px;
+        font-family:sans-serif;
     }
 
 </style>
@@ -393,6 +467,55 @@
             }).catch(function(err){
                 console.error(err);
             });
+
+            return docs;
+
+        }).then(function(docs){
+
+            var template = `
+            <div id="product-preview-pane">
+                <div id="preview-container" style="max-width:100%;text-align:center;">
+                    <img id="product-preview" src="/img/no-image-avaliable-200x200.png">
+                </div>
+                <div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
+                    <div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
+                        <div id="product-snapshots" class="product-snapshots" style="display:inline-block;width:max-content;text-align:center;">
+                            <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                            <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                            <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                            <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                            <li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+        //  photoswipe.js
+
+            var pswp = $(".pswp").get(0);
+            var psui = PhotoSwipeUI_Default;
+
+            var items = []; // build items array.
+
+            docs.forEach(function(json, index){
+                items.push({
+                    html: `<div class="middle" data-index="${index}">`
+                    + `<iframe class="thumbnail viewer" `
+                    + `srcdoc='${template}'></iframe></div>`
+                });
+            });
+
+            var options = {
+                index: selectedIndex, // start at selected index slide.
+            //  read for options: https://photoswipe.com/documentation/options.html
+            };
+
+            var gallery = new PhotoSwipe( pswp, psui, items, options );
+
+            gallery.init();
+
+        //  currentIndex = gallery.itemHolders[1].index;
+            debugMode && console.log({"gallery": gallery});
 
         }).catch(function(err){
             console.error(err);
