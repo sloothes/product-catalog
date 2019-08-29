@@ -92,10 +92,6 @@
 
     }
 
-</style>
-
-<style>
-
     /*  photoswipe  */
 
     .viewer {
@@ -104,64 +100,6 @@
         max-width:90%;
         max-height:90%;
         background:#ffffff33;
-    }
-
-    .snapshot-item {
-        width:85px;
-        height:85px;
-        margin:4px;
-        border:thin solid #ccc;
-        background-size: contain;
-        background-position:50% 50%;
-        background-repeat:no-repeat;
-    }
-
-    .tab-pane {
-        width:100%;
-        min-height:250px;;
-    }
-
-    #product-preview-pane {
-        width:49%;
-        height:600px;
-        min-width:49%;
-        max-width:100%;
-        text-align:center;
-        display:inline-block;
-    /*  border:thin solid #ccc; */
-    }
-
-    #preview-container {
-        max-width:100%;
-        text-align:center;
-        overflow:auto;
-    }
-
-    img#product-preview {
-        width:auto;
-        margin:auto;
-        min-height:350px;
-        max-height:450px;
-    }
-
-    #product-purcashe-pane {
-        width:49%;
-        height:600px;
-        float:right;
-        min-width:49%;
-        max-width:100%;
-        display:inline-block;
-        overflow:auto;
-    /*  border:thin solid #ccc; */
-    }
-
-    #product-purcashe {
-        width:100%;
-        margin:auto;
-        height:600px;
-        min-height:400px;
-        max-height:600px;
-        font-family:sans-serif;
     }
 
 </style>
@@ -473,20 +411,6 @@
 
         }).then(function(docs){
 
-            var template = `
-<div id="product-preview-pane">
-<div id="preview-container" style="max-width:100%;text-align:center;">
-<img id="product-preview" src="/img/no-image-avaliable-200x200.png">
-</div><div id="product-snapshots-pane" style="max-width:100%;display:inline-block;">
-<div id="product-snapshots-container" style="margin:20px 0px;overflow-y:hidden;max-width:100%;text-align:center;">
-<div id="product-snapshots" class="product-snapshots" style="display:inline-block;width:max-content;text-align:center;">
-<li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-<li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-<li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-<li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-<li class="btn btn-default btn-white-outline snapshot-item product-snapshot-item"></li>
-</div></div></div></div>`;
-
         //  photoswipe.js
 
             var pswp = $(".pswp").get(0);
@@ -498,7 +422,7 @@
                 items.push({
                     html: `<div class="middle" data-index="${index}">`
                     + `<iframe class="thumbnail viewer" `
-                    + `srcdoc='${template}'></iframe></div>`
+                    + `src="details.html"></iframe></div>`
                 });
             });
 
