@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <meta name="description" contents="">
 
-    <title>My products (v1.0)</title>
+    <title>My products (v1.6)</title>
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootbox-dialoges.css">
@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/index.css">
     <!-- link rel="stylesheet" href="/style.css" -->
 
+    <script>debugMode = true;</script>
     <script src="/js/loadjs.min.js"></script>
     <script src="/socketcluster.js"></script>
     <script src="/sc-codec-min-bin.js"></script>
@@ -116,41 +117,7 @@
                 <li class="btn btn-primary get-next-btn pull-right">&#9658;</li>
             </div>
 
-            <div id="products-display" class="well">
-
-                <li class="well product-card" style="vertical-align:middle !important;">
-                    <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
-                    <div class="card-field-price">43.99</div>
-                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly 
-                        style="background:none;border:none;background:none;box-shadow:none;max-width:100%;">
-                    <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
-                </li>
-
-                <li class="well product-card" style="vertical-align:middle !important;">
-                    <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
-                    <div class="card-field-price">2.99</div>
-                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly 
-                        style="background:none;border:none;background:none;box-shadow:none;max-width:100%;">
-                    <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
-                </li>
-
-                <li class="well product-card" style="vertical-align:middle !important;">
-                    <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
-                    <div class="card-field-price">32.99</div>
-                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly 
-                        style="background:none;border:none;background:none;box-shadow:none;max-width:100%;">
-                    <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
-                </li>
-
-                <li class="well product-card" style="vertical-align:middle !important;">
-                    <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
-                    <div class="card-field-price">122.99</div>
-                    <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly 
-                        style="background:none;border:none;background:none;box-shadow:none;max-width:100%;">
-                    <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
-                </li>
-
-            </div>
+            <div id="products-display" class="well"></div>
 
             <div style="margin:10px auto 10px auto;height:35px;max-width:350px;">
                 <li class="btn btn-primary btn-white-outline first-page-btn pull-left" style="margin-right:5px;">First</li>
@@ -167,13 +134,49 @@
 
 </div>
 
+    <!-- PHOTOSWIPE -->
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </section>
 
-<script>
-
-    debugMode = true;
-
-</script>
 
 <script src="/js/rawinflate.js"></script>
 <script src="/js/rawdeflate.js"></script>
@@ -210,49 +213,6 @@
     }).catch(function(err){
         console.error(err);
     });
-
-</script>
-
-<script>
-
-/*
-    function productCardTemplateDemo(){
-
-        var card = document.createElement("li");
-        card.classList.add("well", "product-card");
-
-        var img = new Image();
-        img.classList.add("thumbnail");
-        img.src = "/img/no-image-avaliable-200x200.png";
-        img.style.cssText = "width:auto;height:50%;margin:0 auto 10px auto;";
-
-        var price = document.createElement("div");
-        price.classList.add("card-field-price");
-        price.innerText = "0.00" + "&nbsp;&thorn;";
-        price.style.cssText = "font-size:3rem;font-weight:bold;font-family:sans-serif;";
-
-        var title = document.createElement("div");
-        title.classList.add("card-field-title");
-        title.innerText = "Sed ac metus fermentum nisi lacinia sodales.";
-        title.style.cssText = "font-size:2rem;font-weight:normal;font-family:sans-serif;max-height:6rem;overflow:hidden;text-overflow:ellipsis;";
-
-        var button = document.createElement("span");
-        button.innerText = "Details";
-        button.classList.add("btn", "btn-info", "btn-white-outline");
-        button.style.cssText = "width:50%;background-color:#42bcf9;";
-
-        $(card).append(img, price, title, button);
-
-        return card;
-    }
-
-    <li class="well product-card">
-        <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
-        <div class="card-field-price" style="font-size:3rem;font-weight:bold;font-family:sans-serif;">22.99&nbsp;&thorn;</div>
-        <div class="card-title-field" style="font-size:2rem;font-weight:normal;font-family:sans-serif;max-height:6rem;overflow:hidden;">Product title row<br>second title row</div>
-        <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</span>
-    </li>
-*/
 
 </script>
 
@@ -502,3 +462,81 @@
 
 </body>
 </html>
+
+<script>
+
+/*
+    function productCardTemplateDemo(){
+
+        var card = document.createElement("li");
+        card.classList.add("well", "product-card");
+
+        var img = new Image();
+        img.classList.add("thumbnail");
+        img.src = "/img/no-image-avaliable-200x200.png";
+        img.style.cssText = "width:auto;height:50%;margin:0 auto 10px auto;";
+
+        var price = document.createElement("div");
+        price.classList.add("card-field-price");
+        price.innerText = "0.00" + "&nbsp;&thorn;";
+        price.style.cssText = "font-size:3rem;font-weight:bold;font-family:sans-serif;";
+
+        var title = document.createElement("div");
+        title.classList.add("card-field-title");
+        title.innerText = "Sed ac metus fermentum nisi lacinia sodales.";
+        title.style.cssText = "font-size:2rem;font-weight:normal;font-family:sans-serif;max-height:6rem;overflow:hidden;text-overflow:ellipsis;";
+
+        var button = document.createElement("span");
+        button.innerText = "Details";
+        button.classList.add("btn", "btn-info", "btn-white-outline");
+        button.style.cssText = "width:50%;background-color:#42bcf9;";
+
+        $(card).append(img, price, title, button);
+
+        return card;
+    }
+
+    <li class="well product-card">
+        <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
+        <div class="card-field-price" style="font-size:3rem;font-weight:bold;font-family:sans-serif;">22.99&nbsp;&thorn;</div>
+        <div class="card-title-field" style="font-size:2rem;font-weight:normal;font-family:sans-serif;max-height:6rem;overflow:hidden;">Product title row<br>second title row</div>
+        <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</span>
+    </li>
+*/
+
+</script>
+
+<!--
+    <li class="well product-card" style="vertical-align:middle !important;">
+        <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
+        <div class="card-field-price">43.99</div>
+        <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly 
+        style="background:none;border:none;background:none;box-shadow:none;max-width:100%;">
+        <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
+    </li>
+
+    <li class="well product-card" style="vertical-align:middle !important;">
+        <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
+        <div class="card-field-price">2.99</div>
+        <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly 
+        style="background:none;border:none;background:none;box-shadow:none;max-width:100%;">
+        <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
+    </li>
+
+    <li class="well product-card" style="vertical-align:middle !important;">
+        <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
+        <div class="card-field-price">32.99</div>
+        <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly 
+        style="background:none;border:none;background:none;box-shadow:none;max-width:100%;">
+        <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
+    </li>
+
+    <li class="well product-card" style="vertical-align:middle !important;">
+        <img src="/img/no-image-avaliable-200x200.png" class="thumbnail" style="width:auto;height:50%;margin:0 auto 10px auto;">
+        <div class="card-field-price">122.99</div>
+        <input type="text" class="form-control card-field-title" value="Sed ac metus fermentum nisi lacinia sodales" readOnly 
+        style="background:none;border:none;background:none;box-shadow:none;max-width:100%;">
+        <span class="btn btn-info btn-white-outline" style="width:50%;background-color:#42bcf9;">Details</a>
+    </li>
+-->
+
