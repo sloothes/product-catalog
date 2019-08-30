@@ -413,30 +413,33 @@
 
         //  photoswipe.js
 
-            var pswp = $(".pswp").get(0);
-            var psui = PhotoSwipeUI_Default;
+            $("#photoswipe").on("click", function(){
+                var pswp = $(".pswp").get(0);
+                var psui = PhotoSwipeUI_Default;
 
-            var items = []; // build items array.
+                var items = []; // build items array.
 
-            docs.forEach(function(json, index){
-                items.push({
-                    html: `<div class="middle" data-index="${index}">`
-                    + `<iframe class="thumbnail viewer" `
-                    + `src="details.html"></iframe></div>`
+                docs.forEach(function(json, index){
+                    items.push({
+                        html: `<div class="middle" data-index="${index}">`
+                        + `<iframe class="thumbnail viewer" `
+                        + `src="details.html"></iframe></div>`
+                    });
                 });
+
+                var options = {
+                    index: 0, // start at selected index slide.
+                //  read for options: https://photoswipe.com/documentation/options.html
+                };
+
+                var gallery = new PhotoSwipe( pswp, psui, items, options );
+
+                gallery.init();
+
+            //  currentIndex = gallery.itemHolders[1].index;
+                debugMode && console.log({"gallery": gallery});
+
             });
-
-            var options = {
-                index: 0, // start at selected index slide.
-            //  read for options: https://photoswipe.com/documentation/options.html
-            };
-
-            var gallery = new PhotoSwipe( pswp, psui, items, options );
-
-            gallery.init();
-
-        //  currentIndex = gallery.itemHolders[1].index;
-            debugMode && console.log({"gallery": gallery});
 
         }).catch(function(err){
             console.error(err);
