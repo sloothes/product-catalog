@@ -352,7 +352,7 @@
                     cache.match(url).then(function(response){
                         if (response) return response.blob();
                         else return cache.add(url).then(function(){
-                            return cach.match(url).then(function(response){
+                            return cache.match(url).then(function(response){
                                 return response.blob();
                             });
                         });
